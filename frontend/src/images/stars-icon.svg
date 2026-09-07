@@ -1,0 +1,13 @@
+<svg width="171" height="234" viewBox="0 0 171 234" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="171" height="234" fill="#FFFFFF"></rect>
+
+  <!-- Large star -->
+  <path d="M36 95 L48 127 L84 119 L59 145 L86 177 L52 166 L29 193 L31 158 L0 143 L32 134 Z" fill="#3030C8"></path>
+
+  <!-- Right star -->
+  <path d="M125 91 L130 116 L153 102 L145 126 L171 135 L146 140 L150 164 L132 147 L118 169 L116 143 L101 138 L119 127 L110 105 Z" fill="#6B6BCB"></path>
+
+  <!-- Small star -->
+  <path d="M104 45 L108 60 L124 55 L114 66 L126 76 L110 72 L108 87 L101 72 L89 79 L96 66 L89 56 L103 60 Z" fill="#A7A7E5"></path>
+</svg>

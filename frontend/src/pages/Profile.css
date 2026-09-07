@@ -1,0 +1,194 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.profile-page {
+  padding: 10px;
+  width: 100%;
+  max-width: 650px;
+}
+
+.home-page {
+  padding: 0px 10px;
+}
+
+.profile-nav {
+  margin: 0px 10px;
+  padding-bottom: 20px;
+  background-color: white;
+  display: flex;
+  justify-content: space-around;
+}
+
+.layout {
+  width: 100%;
+  border: 2px solid green;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.page {
+  height: 100vh;
+  width: 100%;
+  max-width: 650px;
+  height: 100%;
+  min-height: 100vh;
+  background-color: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  margin-bottom: 65px;
+}
+
+.profile-layout {
+  background-color: black;
+  min-height: 100vh;
+}
+
+.addPost-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-text {
+  display: flex;
+  align-items: center;
+}
+
+
+.post-type {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 20px;
+}
+
+.description-box {
+  display: flex;
+  justify-content: center;
+}
+
+.post-description {
+  width: 100%;
+  max-width: 600px;
+  padding: 10px;
+  font-size: larger;
+  margin: 10px;
+  border-radius: 10px;
+  border: 2px solid #E2E8F0;
+}
+
+.post-description:focus,.post-description:active {
+  outline: #E2E8F0;
+}
+
+.post-btn {
+  color: white;
+  background-color: #2563EB;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 10px;
+}
+
+.image-upload::file-selector-button {
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.image-upload {
+  margin: 10px;
+}
+
+
+.img-container {
+  width: 100%;
+  max-width: 650px;
+  display: flex;
+  justify-content: center;
+}
+
+.selected-img {
+  width: 400px;
+}
+
+.search-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  max-width: 650px;
+}
+
+.search-box {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 5px 10px;
+  border-radius: 20px;
+  background-color: #EFEFEF;
+  width: 100%;
+  margin-right: 10px;
+}
+
+.search-icon {
+  color: #737373;
+}
+
+.search-input {
+  background-color: #EFEFEF;
+  border: none;
+  font-size: 20px;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #737373;
+  padding: 0px 10px;
+  width: 100%;
+}
+
+.search-input:focus {
+  outline: none;
+}
+
+.sub-profile-page {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 10px;
+}
+
+.about-box, .detail-box, .skills-export, .skills-learn {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  border: 2px solid #E2E8F0;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 1px 1px 1px rgba(15, 39, 71, 0.08)
+}
+
+.about-text {
+  color: #475569;
+  width: 100%;
+  line-height: 1.6rem; 
+}
+
+.about-input {
+  color: #475569;
+  width: 100%;
+  field-sizing: content;
+  font-size: 1rem;
+  border: none;
+  line-height: 1.6rem;
+}
+
+.about-input:focus{
+  outline: none;
+}

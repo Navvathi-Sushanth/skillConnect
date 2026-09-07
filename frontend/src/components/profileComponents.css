@@ -1,0 +1,110 @@
+.about-edit-btn {
+    padding: 5px 10px;
+    background-color: #FFFFFF;
+    border: 2px solid #2563EB;
+    color: #2563EB;
+    border-radius: 5px;
+    display: flex;
+    font-size: 0.8rem;
+    font-weight: bolder;
+    gap: 5px;
+}
+
+.about-edit-btn:hover{
+    cursor: auto;
+}
+
+.edit-icon {
+    width: 15px;
+}
+
+.adout-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  color: #0F2747;
+  margin-bottom: 20px;
+}
+
+.detail-component {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.detail-title {
+    color: #64748B;
+    margin-right: 20px;
+}
+
+.detail-value {
+    color: #1E3A5F;
+}
+
+.details-input {
+    text-align: right;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #1E3A5F;
+    border: none;
+    field-sizing: content;
+    border: none;
+    resize: none;
+}
+
+.details-input:focus {
+    outline: none;
+}
+
+.save-exit-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0px;
+}
+
+.save-btn,.cancel-btn,.add-skill-btn {
+  padding: 5px 10px;
+  background-color: #2563EB;
+  color: #FFFFFF;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: bolder;
+}
+
+.skill-footer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.add-skill-input {
+    width: 100%;
+    padding: 5px;
+    font-size: medium;
+    font-weight: bolder;
+    border: 2px solid #64748B;
+    margin-right: 10px;
+    border-radius: 10px;
+}
+
+.add-skill-input:focus {
+    outline: none;
+}
+
+.skill-box {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    color: darkblue;
+}
+
+.skill-delete-btn {
+    padding: 5px 8px;
+    border: 2px solid #2563EB;
+    color: #2563EB;
+    background-color: #FFFFFF;
+    border-radius: 20px;
+    margin: 0px;
+}
