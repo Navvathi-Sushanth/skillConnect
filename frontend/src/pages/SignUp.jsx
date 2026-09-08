@@ -15,7 +15,7 @@ export default function SignUp(){
 
     const navigate = useNavigate();
     const handleSignUpNav = ()=>{ 
-        navigate("/login");
+        navigate("/verify-email");
     }
     
     const signUpHandler = async ()=>{

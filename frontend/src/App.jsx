@@ -22,6 +22,7 @@ export default function App(){
             <Routes>
               <Route path="/login" element={<LoginPage />} />
               <Route path="/signup" element={<SignUp />} />
+              <Route path="verify-email" element={<h1>verify</h1>} />
               <Route element={<ProtectedRoute />}>
                 <Route element={<Layout/>}>
                   <Route path="/" element={<Home/>}/>
@@ -37,8 +38,8 @@ export default function App(){
                     <Route path="posts" element={<PostPage />} />
                   </Route>
                 </Route>
-                <Route path="*" element={<Page404 />} />
               </Route>
+              <Route path="*" element={<Page404 />} />
             </Routes>
           </Suspense>
         </BrowserRouter>
