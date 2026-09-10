@@ -2,11 +2,13 @@ const { default: mongoose, model } = require("mongoose");
 
 const {
         user,
+        singUpUser,
         connection,
         request,
         skill,
         otherDetails,
         chatRoom,
+        otp
 } = require("./User");
 
 const {
@@ -16,6 +18,8 @@ const {
 } = require("./postShema");
 
 const USERS = mongoose.model("Users",user);
+
+const SIGNUP_USERS = mongoose.model("SingUpUsers", singUpUser);
 
 const CONNECTIONS = mongoose.model("Connections",connection);
 
@@ -35,8 +39,12 @@ const DETAILS = mongoose.model("Details",otherDetails);
 
 const CHATROOMS = mongoose.model("ChatRooms",chatRoom);
 
+const OTPS = mongoose.model("OTPS", otp);
+
 module.exports = {
+        OTPS,
         USERS,
+        SIGNUP_USERS,
         CONNECTIONS,
         REQUESTS,
         EXPERTS,

@@ -15,7 +15,7 @@ export default function SignUp(){
 
     const navigate = useNavigate();
     const handleSignUpNav = ()=>{ 
-        navigate("/verify-email");
+        navigate(`/verify-email`);
     }
     
     const signUpHandler = async ()=>{
@@ -29,6 +29,12 @@ export default function SignUp(){
         }
 
         try {
+
+            setCredentials((prev)=>({
+                ...prev,
+                userEmail: prev.userEmail.toLocaleLowerCase(),
+            }))
+
             const response = await fetch("http://localhost:3000/api/sign-up", {
 
                 method : "POST",
@@ -40,6 +46,7 @@ export default function SignUp(){
 
             const data = await response.json();
             if(data.message == "signUp successfully"){
+                localStorage.setItem("email",credentials.userEmail);
                 handleSignUpNav();
             }
             if(data.message == "User is already exists"){
@@ -110,7 +117,10 @@ export default function SignUp(){
                     value={credentials.userPassword}
                 />
                 {outputText && <p className="output-text">{outputText}</p>}
-                <button className="login-input-btn login-input" onClick={signUpHandler}>SignUP</button>
+                <button 
+                    className="login-input-btn login-input" 
+                    onClick={signUpHandler}
+                    >SignUP</button>
             </div>+
         </div>
     )

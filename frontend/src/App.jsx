@@ -13,6 +13,7 @@ import ProtectedRoute from "./ProtectedRoute.jsx";
 import LoginPage from "./pages/LoginPage.jsx";
 import SignUp from "./pages/SignUp.jsx";
 import Requests from "./pages/Requests.jsx";
+import VerificationPage from "./pages/VerificationPage.jsx";
 
 
 export default function App(){
@@ -22,7 +23,7 @@ export default function App(){
             <Routes>
               <Route path="/login" element={<LoginPage />} />
               <Route path="/signup" element={<SignUp />} />
-              <Route path="verify-email" element={<h1>verify</h1>} />
+              <Route path="/verify-email" element={<VerificationPage />} />
               <Route element={<ProtectedRoute />}>
                 <Route element={<Layout/>}>
                   <Route path="/" element={<Home/>}/>

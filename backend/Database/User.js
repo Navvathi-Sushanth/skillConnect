@@ -32,6 +32,45 @@ const user = new mongoose.Schema({
 });
 
 
+const singUpUser = mongoose.Schema({
+
+    userName : {
+        type: String,
+        required: true,
+        unique: true,
+    },
+
+    userEmail: {
+        type: String,
+        unique: true,
+        required: true,
+    },
+
+    userPassword: {
+        type: String,
+        required: true,
+    },
+
+    userPIN : {
+        type: String,
+        required: true,
+    },
+
+    isUserVerified : {
+        type: Boolean,
+        defalut: false,
+    },
+
+    verificationTokenExpireAt: {
+        type: Date,
+        default: null,
+    }
+
+},{
+    timestamps: true,
+})
+
+
 const connection = new mongoose.Schema({
 
     followersId : {
@@ -173,12 +212,35 @@ const message = mongoose.Schema({
     timestamps: true,
 })
 
+const otp = mongoose.Schema({
+
+    otp: {
+        type: String,
+        required: true,
+    },
+
+    userEmail: {
+        type: String,
+        required: true,
+    },
+
+    expiresAt: {
+        type: Date,
+        required: true,
+    }
+
+},{
+    timestamps: true,
+})
+
 module.exports = {
     user,
+    singUpUser,
     connection,
     request,
     skill,
     otherDetails,
     chatRoom,
     message,
+    otp,
 }

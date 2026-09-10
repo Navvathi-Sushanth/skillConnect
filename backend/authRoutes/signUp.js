@@ -1,4 +1,8 @@
-const { USERS, DETAILS } = require("../Database/Models.js");
+const {
+    USERS,
+    SIGNUP_USERS,
+    DETAILS 
+} = require("../Database/Models.js");
 
 async function signUp(req, res){
 
@@ -20,12 +24,27 @@ async function signUp(req, res){
     if(user){
         return  res.status(409).json({
                     message: "User is already exists",
+                    token: user._id,
                 })
     }
 
     try {
 
-        user = await USERS.create({
+        user = await SIGNUP_USERS.findOne({
+            userEmail,
+            userPIN,
+        })
+
+        if(user){
+
+            return res.status(201).json({
+                message: "signUp successfully",
+                token: user._id,
+            })
+
+        }
+
+        user = await SIGNUP_USERS.create({
             userName,
             userEmail, 
             userPIN, 
@@ -38,12 +57,14 @@ async function signUp(req, res){
 
         return res.status(201).json({
             message: "signUp successfully",
+            token: user._id,
         })
 
     }catch(err){
         console.log("Error from SingUp : " + err);
         return res.status(500).json({
             message: "Internal server error from data base",
+            token: null,
         });
     }
 }
