@@ -22,27 +22,32 @@ function createWebToken(user){
 }
 
 async function verifyToken(req, res){
-    
-    if(req.headers.authorization!=null){
-        const token = req.headers.authorization.split(" ")[1];
-        const decoded = jwt.verify(token, process.env.JWT_SECRET);
-        const user = await USERS.findOne({
-            userEmail : decoded.userEmail,
-            userPIN : decoded.userPIN,
-        });
+    try{
 
-        if(user!=null){
-            res.status(200).json({
-                message: "authorized",
-            })
+        if(req.headers.authorization!=null){
+            const token = req.headers.authorization.split(" ")[1];
+            const decoded = jwt.verify(token, process.env.JWT_SECRET);
+            const user = await USERS.findOne({
+                userEmail : decoded.userEmail,
+                userPIN : decoded.userPIN,
+            });
+
+            if(user!=null){
+                res.status(200).json({
+                    message: "authorized",
+                })
+            }
         }
-    }
-    
-    else {
+        
+    }catch(err){
+        console.log("Error in the verify token : "+err);
         return res.status(401).json({
             message: "unauthorized",
         })
     }
+    return res.status(401).json({
+        message: "unauthorized",
+    })
 }
 
 module.exports = {

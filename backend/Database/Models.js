@@ -19,7 +19,7 @@ const {
 
 const USERS = mongoose.model("Users",user);
 
-const SIGNUP_USERS = mongoose.model("SingUpUsers", singUpUser);
+const SIGNUP_USERS = mongoose.model("SignUpUsers", singUpUser);
 
 const CONNECTIONS = mongoose.model("Connections",connection);
 

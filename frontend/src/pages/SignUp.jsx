@@ -57,6 +57,12 @@ export default function SignUp(){
                 setOutputText("Internal server error from data base");
             }
 
+            console.log(response, data)
+
+            if(response.status == 409){
+                setOutputText(data.message);
+            }
+
         }catch(err){
             console.log("Error from signUpHandler : " + err);
         }

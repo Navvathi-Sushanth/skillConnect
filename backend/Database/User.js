@@ -37,12 +37,10 @@ const singUpUser = mongoose.Schema({
     userName : {
         type: String,
         required: true,
-        unique: true,
     },
 
     userEmail: {
         type: String,
-        unique: true,
         required: true,
     },
 

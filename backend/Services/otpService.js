@@ -1,5 +1,5 @@
 const nodemailer = require("nodemailer");
-const { SIGNUP_USERS, OTPS } = require("../Database/Models");
+const { SIGNUP_USERS, OTPS, USERS,DETAILS } = require("../Database/Models");
 
 const transporter = nodemailer.createTransport({
     service: "gmail",
@@ -91,8 +91,21 @@ async function verifyOTP(req, res){
         }
         else {
             if(otp==dataBaseOTP.otp){
+                const user = await SIGNUP_USERS.findOne({
+                    userEmail: userEmail,
+                })
+
+                const {_id, ...validUser} = user.toObject();
+
+                const newValidUser = await USERS.create(validUser);
+
+                const details = DETAILS.create({
+                    userId: newValidUser._id,
+                });
+
                 return res.status(200).json({
-                    message: "verified"
+                    message: "verified",
+                    user: newValidUser
                 });
             }
             else {

@@ -59,9 +59,15 @@ export default function PostPage(){
         <div className="page">
 
             {
-                posts.map((details)=><Post details={details} key = {details.postId} />)
-                ||
-                <h2>Not posted Yet</h2>
+                (posts.length==0)?
+                    <h1 style={
+                        {
+                            margin: "20px",
+                            textAlign: "center"
+                        }
+                    }>NO POSTS YET</h1>
+                :
+                    posts.map((details)=><Post details={details} key = {details.postId} />)
             }
 
         </div>
