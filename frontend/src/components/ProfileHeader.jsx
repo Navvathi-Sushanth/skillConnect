@@ -10,6 +10,8 @@ export default function ProfileHeader(props){
     userProfileImg,
     userCollege,
     isUser,
+    followerCount,
+    followingCount,
   } = props.details;
   return (
     <div className="Profile-header">
@@ -22,10 +24,25 @@ export default function ProfileHeader(props){
             <h1>{userName}</h1>
             <p>{userCollege}</p>
             <p>{userPIN}</p>
+            <div className="follow-box">
+              <NavLink 
+                className="follow-nav"
+                to="./followers"
+                >
+                  {followerCount} followers
+              </NavLink>
+               <NavLink 
+                className="follow-nav"
+                to="./following"
+                >
+                  {followingCount} following
+              </NavLink>
+            </div>
           </div>
         </div>
+        
         {
-          !isUser
+          (!isUser)
           &&
           <div className="follow-message-box">
             <button className="follow-btn">Follow</button>
@@ -33,6 +50,7 @@ export default function ProfileHeader(props){
               Message
             </button>
           </div>
+            
         }
       </div>
       <div className="profile-nav">

@@ -30,7 +30,6 @@ export default function SearchComponent(props){
                 <div className="user-details">
                     <h4>{userName}</h4>
                     <p className="search-deatils">{userEmail}</p>
-                    <p className="search-deatils">followers : 10</p>
                 </div>
             </div>
             <div className="search-right">

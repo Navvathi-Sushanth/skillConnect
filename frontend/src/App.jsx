@@ -14,6 +14,7 @@ import LoginPage from "./pages/LoginPage.jsx";
 import SignUp from "./pages/SignUp.jsx";
 import Requests from "./pages/Requests.jsx";
 import VerificationPage from "./pages/VerificationPage.jsx";
+import FollowersPage from "./pages/FollowersPage.jsx";
 
 
 export default function App(){
@@ -32,6 +33,8 @@ export default function App(){
                     <Route index element={<ProfileSkill />}/>
                     <Route path="posts" element={<PostPage />} />
                   </Route>
+                  <Route path="/profile/followers" element={<FollowersPage />} />
+                  <Route path="/profile/following" element={<FollowersPage />} />
                   <Route path="/addPost" element={<AddPost />} />
                   <Route path="/requests" element={<Requests />} />
                   <Route path="/users/:id" element={<ProfileLayout />} >

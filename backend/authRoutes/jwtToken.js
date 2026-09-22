@@ -33,7 +33,7 @@ async function verifyToken(req, res){
             });
 
             if(user!=null){
-                res.status(200).json({
+                return res.status(200).json({
                     message: "authorized",
                 })
             }

@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const { USERS, DETAILS } = require("../Database/Models.js");
+const { USERS, DETAILS, CONNECTIONS } = require("../Database/Models.js");
 
 async function getDetails(req, res){
     try {
@@ -46,6 +46,14 @@ async function getDetails(req, res){
                 "userName userPIN userEmail userProfileImg"
             );
 
+        const followerCount = await CONNECTIONS.countDocuments({
+            followingId: userId,
+        });
+
+        const followingCount = await CONNECTIONS.countDocuments({
+            followersId: userId,
+        });
+
         let cleanedUser = null;
         if(user){
             cleanedUser = {
@@ -60,6 +68,8 @@ async function getDetails(req, res){
                 userCollege: user.userCollege,
                 userAbout: user.userAbout,
                 isUser: (reqUserId == "undefined" || !reqUserId),
+                followerCount,
+                followingCount,
             }
         }
 
@@ -71,8 +81,8 @@ async function getDetails(req, res){
     }catch(err){
         console.log("Error in the getDetails : "+ err);
         return res.status(200).json({
-        message: "something went incorrect in database of getDetails",
-    })
+            message: "something went incorrect in database of getDetails",
+        })
     }
     res.status(200).json({
         message: "something went incorrect in getDetails route",

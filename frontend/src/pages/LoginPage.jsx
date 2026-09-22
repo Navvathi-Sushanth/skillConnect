@@ -55,6 +55,7 @@ export default function LoginPage(){
 
             if(data.message == "authorized"){
                 localStorage.setItem("token",data.token);
+                localStorage.setItem("userEmail",credentials.userEmail);
                 navigate("/");
             }
             else {
