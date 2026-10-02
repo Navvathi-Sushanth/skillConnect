@@ -191,6 +191,11 @@
     height: auto;
 }
 
+.descriotion {
+    text-wrap: inherit;
+    margin-bottom: 20px;
+}
+
 .search-component {
     border: 2px solid #DBDBDB;
     margin: 10px;

@@ -10,7 +10,7 @@ export const sendRequest = async (receiver)=>{
 
         const token = localStorage.getItem("token");
 
-        const response = await fetch("http://localhost:3000/api/user/send-request",{
+        const response = await fetch(`${import.meta.env.VITE_END_POINT}/api/user/send-request`,{
             method: "POST",
             headers: {
                 "Content-Type" : "application/json",
@@ -70,7 +70,7 @@ export default function Post(props){
                 }
             </header>
             <div className="post-container">
-                <p className="descriotion">{description}</p>
+                <pre className="descriotion">{description}</pre>
                 {
                     imgUrl
                     &&

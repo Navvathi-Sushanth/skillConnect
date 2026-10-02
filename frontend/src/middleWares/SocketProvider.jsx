@@ -9,8 +9,8 @@ export default function SocketProvider({children}){
 
     useEffect(()=>{
 
-        const END_POINT = import.meta.env.END_POINT;
-        const newSocket = io("http://localhost:5000",{
+        const END_POINT = import.meta.env.VITE_END_POINT;
+        const newSocket = io(END_POINT, {
             autoConnect: false,
             auth: {
                 // token: token

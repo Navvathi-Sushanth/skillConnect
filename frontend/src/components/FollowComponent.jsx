@@ -16,7 +16,7 @@ export default function FollowComponent(props){
     const removeBtnHandler = async ()=>{
         try{
 
-            const response = await fetch("http://localhost:3000/api/user/remove-connection",{
+            const response = await fetch(`${import.meta.env.VITE_END_POINT}/api/user/remove-connection`,{
                 method: "DELETE",
                 headers: {
                     "Content-Type" : "application/json"

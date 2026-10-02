@@ -19,7 +19,7 @@ export default function VerificationPage(){
 
         try{
 
-            const response = await fetch("http://localhost:3000/api/verify-OTP",{
+            const response = await fetch(`${import.meta.env.VITE_END_POINT}/api/verify-OTP`,{
                 method: "POST",
                 headers: {
                     "Content-Type":"application/json"
@@ -53,7 +53,7 @@ export default function VerificationPage(){
             const localEmail = localStorage.getItem("email");
             setEmail(localEmail);
 
-            const response = await fetch("http://localhost:3000/api/email-verification",{
+            const response = await fetch(`${import.meta.env.VITE_END_POINT}/api/email-verification`,{
                 method: "POST",
                 headers: {
                     "Content-Type" : "application/json"

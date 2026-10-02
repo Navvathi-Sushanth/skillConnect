@@ -28,7 +28,7 @@ export default function AddPost(){
         formData.append("imageUrl",selectedImg);
         try{
             const token = localStorage.getItem("token");
-            const response = await fetch("http://localhost:3000/api/post/add-post",{
+            const response = await fetch(`${import.meta.env.VITE_END_POINT}/api/post/add-post`,{
                 method: "POST",
                 headers : {
                     "token": token,

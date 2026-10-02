@@ -11,7 +11,7 @@ export default function Requests(){
 
             const token = localStorage.getItem("token");
 
-            const response = await fetch("http://localhost:3000/api/user/get-requests",{
+            const response = await fetch(`${import.meta.env.VITE_END_POINT}/api/user/get-requests`,{
                 method: "GET",
                 headers: {
                     "token": token

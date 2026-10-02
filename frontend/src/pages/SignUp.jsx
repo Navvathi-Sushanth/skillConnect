@@ -35,7 +35,7 @@ export default function SignUp(){
                 userEmail: prev.userEmail.toLocaleLowerCase(),
             }))
 
-            const response = await fetch("http://localhost:3000/api/sign-up", {
+            const response = await fetch(`${import.meta.env.VITE_END_POINT}/api/sign-up`, {
 
                 method : "POST",
                 headers : {
@@ -119,7 +119,7 @@ export default function SignUp(){
                     type="password" 
                     onChange={textInputHandler} 
                     className="login-input" 
-                    placeholder="User Password"
+                    placeholder="6 digits only"
                     value={credentials.userPassword}
                 />
                 {outputText && <p className="output-text">{outputText}</p>}

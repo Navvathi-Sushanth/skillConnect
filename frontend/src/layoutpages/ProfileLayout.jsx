@@ -19,7 +19,7 @@ export default function ProfileLayout(){
             try {
 
                 const token = localStorage.getItem("token");
-                const response = await fetch("http://localhost:3000/api/user/get-details",{
+                const response = await fetch(`${import.meta.env.VITE_END_POINT}/api/user/get-details`,{
                     method: "GET",
                     headers: {
                         "Content-Type" : "application/json",

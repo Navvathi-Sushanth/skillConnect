@@ -18,7 +18,7 @@ export default function PostPage(){
 
         try{
             loadingRef.current = true;
-            const response = await fetch(`http://localhost:3000/api/post/get-user-posts?page=${pageRef.current}`,{
+            const response = await fetch(`${import.meta.env.VITE_END_POINT}/api/post/get-user-posts?page=${pageRef.current}`,{
                 headers : {
                     "token": token,
                     "userid": userId,
@@ -73,5 +73,4 @@ export default function PostPage(){
         </div>
     )
 }
-
 

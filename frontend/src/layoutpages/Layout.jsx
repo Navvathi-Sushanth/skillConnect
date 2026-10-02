@@ -1,6 +1,6 @@
 import {Outlet} from 'react-router-dom';
 import Footer from "../components/Footer.jsx";
-import "../pages/profile.css";
+import "../pages/Profile.css";
 
 export default function Layout(){
     return(

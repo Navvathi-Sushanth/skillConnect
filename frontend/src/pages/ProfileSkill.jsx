@@ -35,7 +35,7 @@ export default function ProfileSkill(props){
     const deleteSkill = async (childId,component)=>{
         try{
 
-            const response = await fetch("http://localhost:3000/api/user/delete-skill",{
+            const response = await fetch(`${import.meta.env.VITE_END_POINT}/api/user/delete-skill`,{
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json",
@@ -73,7 +73,7 @@ export default function ProfileSkill(props){
             }
             
             const token = localStorage.getItem("token");
-            const response = await fetch("http://localhost:3000/api/user/add-skill",{
+            const response = await fetch(`${import.meta.env.VITE_END_POINT}/api/user/add-skill`,{
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -118,7 +118,7 @@ export default function ProfileSkill(props){
             }
 
             const token = localStorage.getItem("token");
-            const response = await fetch("http://localhost:3000/api/user/save-details",{
+            const response = await fetch(`${import.meta.env.VITE_END_POINT}/api/user/save-details`,{
                 method: "POST",
                 headers: {
                     "Content-Type" : "application/json",
@@ -141,7 +141,7 @@ export default function ProfileSkill(props){
 
             const token = localStorage.getItem("token")
 
-            const response = await fetch("http://localhost:3000/api/user/get-skills",{
+            const response = await fetch(`${import.meta.env.VITE_END_POINT}/api/user/get-skills`,{
                 method: "GET",
                 headers: {
                     "Content-Type" : "application/json",

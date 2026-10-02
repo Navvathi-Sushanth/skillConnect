@@ -26,7 +26,7 @@ export default function FollowersPage(){
 
             const userEmail = localStorage.getItem("userEmail");
             
-            const response = await fetch(`http://localhost:3000/api/user/connections/:${currentPageRef}`,{
+            const response = await fetch(`${import.meta.env.VITE_END_POINT}/api/user/connections/:${currentPageRef}`,{
                 method: "POST",
 
                 headers: {
