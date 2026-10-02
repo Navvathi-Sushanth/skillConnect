@@ -12,7 +12,12 @@ const post = new mongoose.Schema({
         required: true,
     },
 
-    imgUrl : {
+    publicId: {
+        type: String,
+        required: true,
+    },
+
+    secureImgUrl : {
         type: String,
         required: true,
     }

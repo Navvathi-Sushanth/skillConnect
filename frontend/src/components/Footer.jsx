@@ -11,7 +11,7 @@ export default function Footer(){
           <Link to="/">
             <img src={homeIcon} alt="homepage icon" className="icons"/>
           </Link>
-          <Link to="messages">
+          <Link to="conversations">
             <img src={messageIcon} alt="homepage icon" className="icons"/>
           </Link>
           <Link to="search">

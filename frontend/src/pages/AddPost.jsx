@@ -8,6 +8,7 @@ import mirrorStars from "../images/stars-mirror-icon.png";
 export default function AddPost(){
     
     const [description, setDescription] = useState("");
+    const [previewImg , setPreviewImg] = useState(null);
     const textInputHandler = (e)=>{
         setDescription(e.target.value??"error in the texthandler");
     }
@@ -16,14 +17,15 @@ export default function AddPost(){
     function handleImageChange(e){
        const file = e.target.files[0];
         if(file){
-            setSelectedImg(URL.createObjectURL(file));
+            setSelectedImg(file);
+            setPreviewImg(URL.createObjectURL(file));
         }
     }
 
     const postHandler = async ()=>{
         const formData = new FormData();
         formData.append("description",description);
-        formData.append("image",selectedImg);
+        formData.append("imageUrl",selectedImg);
         try{
             const token = localStorage.getItem("token");
             const response = await fetch("http://localhost:3000/api/post/add-post",{
@@ -39,6 +41,7 @@ export default function AddPost(){
         finally{
             setDescription("");
             setSelectedImg(null);
+            setPreviewImg(null);
         }
     }
 
@@ -77,9 +80,9 @@ export default function AddPost(){
             />
             <div className="img-container">
                 {
-                    selectedImg 
+                    previewImg 
                     &&
-                    <img src={selectedImg} className="selected-img"/>
+                    <img src={previewImg} className="selected-img"/>
                 }
             </div>
 

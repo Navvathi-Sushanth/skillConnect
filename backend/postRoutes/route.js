@@ -9,7 +9,7 @@ const getUserPosts = require('./getUserPost.js');
 
 
 
-router.post("/add-post",upload.single('image'),addPost);
+router.post("/add-post",upload.single('imageUrl'),addPost);
 router.get("/get-posts",getPosts);
 router.get("/get-user-posts",getUserPosts);
 

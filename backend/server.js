@@ -12,7 +12,9 @@ connectDB();
 app.use("/api",require("./authRoutes/authRoutes"));
 app.use('/api/post',require("./postRoutes/route"));
 app.use('/api/user',require("./userRoutes/userRoutes"));
+app.use("/api",require("./wss/messagesRoute.js"))
 
 app.listen(3000,"0.0.0.0",()=>{
     console.log("server is running on the port 3000");
-})
+});
+

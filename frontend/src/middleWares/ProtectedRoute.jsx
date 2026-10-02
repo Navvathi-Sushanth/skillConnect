@@ -13,8 +13,9 @@ export default function ProtectedRoute(){
             try {
                 console.log("authentiacationHandeler");
                 const token = localStorage.getItem("token");
+                console.log(import.meta.env.VITE_END_POINT);
                 if(token){
-                    const response = await fetch("http://localhost:3000/api/authenticate",{
+                    const response = await fetch(`${import.meta.env.VITE_END_POINT}/api/authenticate`,{
                         method: "POST",
                         headers: {
                             "Content-Type" : "application/json",

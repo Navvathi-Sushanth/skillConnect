@@ -99,7 +99,7 @@ async function verifyOTP(req, res){
 
                 const newValidUser = await USERS.create(validUser);
 
-                const details = DETAILS.create({
+                const details = await DETAILS.create({
                     userId: newValidUser._id,
                 });
 

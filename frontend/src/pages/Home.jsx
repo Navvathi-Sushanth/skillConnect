@@ -31,7 +31,7 @@ export default function Home(){
         try{
             loadingRef.current = true;
             const token = localStorage.getItem("token");
-            const response = await fetch(`http://localhost:3000/api/post/get-posts?page=${pageRef.current}`,{
+            const response = await fetch(`${import.meta.env.VITE_END_POINT}/api/post/get-posts?page=${pageRef.current}`,{
                 method: "GET",
                 headers : {
                     "token" : token,

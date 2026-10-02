@@ -9,12 +9,14 @@ import PostPage from "./pages/PostPage.jsx";
 import ProfileSkill from "./pages/ProfileSkill.jsx"
 import AddPost from "./pages/AddPost.jsx";
 import Page404 from "./pages/Page404.jsx";
-import ProtectedRoute from "./ProtectedRoute.jsx";
+import ProtectedRoute from "./middleWares/ProtectedRoute.jsx";
 import LoginPage from "./pages/LoginPage.jsx";
 import SignUp from "./pages/SignUp.jsx";
 import Requests from "./pages/Requests.jsx";
 import VerificationPage from "./pages/VerificationPage.jsx";
 import FollowersPage from "./pages/FollowersPage.jsx";
+import SocketProvider from "./middleWares/SocketProvider.jsx";
+import ConversationsPage from "./pages/ConversationsPage.jsx";
 
 
 export default function App(){
@@ -26,8 +28,13 @@ export default function App(){
               <Route path="/signup" element={<SignUp />} />
               <Route path="/verify-email" element={<VerificationPage />} />
               <Route element={<ProtectedRoute />}>
-                <Route element={<Layout/>}>
+                <Route element={
+                  <SocketProvider>
+                    <Layout />
+                  </SocketProvider>
+                }>
                   <Route path="/" element={<Home/>}/>
+                  <Route path="conversations" element={<ConversationsPage />} />
                   <Route path="/search" element={<SearchPage />} />
                   <Route path="/profile" element={<ProfileLayout />} >
                     <Route index element={<ProfileSkill />}/>

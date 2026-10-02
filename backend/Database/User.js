@@ -168,21 +168,25 @@ const otherDetails = mongoose.Schema({
 
 const chatRoom = mongoose.Schema({
 
-    user1: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Users",
-        required: true,
-    },
+    participants : [
+        {
+            type: mongoose.Schema.ObjectId,
+            ref: "Users",
+            required: true,
+        }
+    ],
 
-    user2: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Users",
+    conversationKey: {
+        type: String,
         required: true,
+        unique: true,
+        index: true,
     },
 
     lastMessageTime : {
         type: Date,
         default: Date.now,
+        index: true,
     }
     
 }, {

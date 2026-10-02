@@ -15,20 +15,23 @@ async function getPosts(req, res) {
             })
             .skip(skip)
             .limit(10)
-            .select("userId description imgUrl")
-            .populate("userId","userName userProfileImg");
+            .select("userId description secureImgUrl")
+            .populate("userId","_id userName userProfileImg");
+
+        
         
         let cleanedPosts = null;
         if(posts!=null){
             cleanedPosts = posts.map((post)=>({
                 userId: post.userId._id,
                 description: post.description,
-                imgUrl: post.imgUrl,
+                imgUrl: post.secureImgUrl,
                 userName : post.userId?.userName || "UnknowUser",
                 profileImg : post.userId?.userProfileImg,
             }));
 
             console.log(cleanedPosts);
+
             return res.json({
                 message: "successful",
                 posts: cleanedPosts,

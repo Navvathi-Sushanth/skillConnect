@@ -71,7 +71,11 @@ export default function Post(props){
             </header>
             <div className="post-container">
                 <p className="descriotion">{description}</p>
-                <img src={PostImg} alt="post image" className="post-img" />
+                {
+                    imgUrl
+                    &&
+                    <img src={imgUrl} alt="post image" className="post-img" />
+                }
             </div>
         </div>
     )
