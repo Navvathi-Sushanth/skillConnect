@@ -2,7 +2,10 @@ const nodemailer = require("nodemailer");
 const { SIGNUP_USERS, OTPS, USERS,DETAILS } = require("../Database/Models");
 
 const transporter = nodemailer.createTransport({
-    service: "gmail",
+    host: "smtp.gmail.com", 
+    port: 587, 
+    secure: false, 
+    requireTLS: true,
     auth: {
         user: "campusconnectbyte@gmail.com",
         pass: "ywdt yavm lajj uush",
@@ -60,7 +63,7 @@ async function sendOTP(req,res){
     }catch(err){
         console.log(err)
         return res.status(500).json({
-            message: "internal server error",
+            message: "internal server error ",
         })
     }
 }
