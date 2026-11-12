@@ -30,7 +30,7 @@ export default function DirectMessagePage(){
             if(pageRef.current == 0)
               setMessages([]);
             console.log(conversationKey);
-            const response = await fetch(`import.meta.env.VITE_SOCKET_END_POINT/api/initial-messages?page=${pageRef.current}`, {
+            const response = await fetch(`${import.meta.env.VITE_SOCKET_END_POINT}/api/initial-messages?page=${pageRef.current}`, {
                 method: "GET",
                 
                 headers: {
