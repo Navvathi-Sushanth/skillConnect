@@ -5,7 +5,9 @@ const connectDB = require("./Database/dbConnection.js");
 require("dotenv").config();
 
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+    origin: "https://connectyourskill.vercel.app",
+}));
 
 connectDB();
 
