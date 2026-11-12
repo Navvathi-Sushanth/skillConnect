@@ -7,10 +7,6 @@ async function getDetails(req, res){
         const token = req.headers.authentication;
         const reqUserId = req.headers?.userid;
         let userId = null;
-
-        console.log(typeof reqUserId)
-
-        console.log(!reqUserId)
         
         if(reqUserId == "undefined" || !reqUserId){
             const decoded = jwt.verify(
@@ -43,7 +39,7 @@ async function getDetails(req, res){
             })
             .populate(
                 "userId",
-                "userName userPIN userEmail userProfileImg"
+                "_id userName userPIN userEmail userProfileImg"
             );
 
         const followerCount = await CONNECTIONS.countDocuments({
@@ -57,8 +53,8 @@ async function getDetails(req, res){
         let cleanedUser = null;
         if(user){
             cleanedUser = {
+                userId : user.userId._id,
                 userName : user.userId.userName,
-                userEmail : user.userId.userEmail,
                 userPIN : user.userId.userPIN,
                 userProfileImg: user.userId.userProfileImg,
                 userDepartment : user.userDepartment,
@@ -70,6 +66,13 @@ async function getDetails(req, res){
                 isUser: (reqUserId == "undefined" || !reqUserId),
                 followerCount,
                 followingCount,
+            }
+
+            if(userId!=reqUserId){
+                cleanedUser.userEmail = user.userId?.userEmail;
+            }
+            else {
+                cleanedUser.userEmail = user.userId?.userEmail.slice(0,3) + "****@gmail.com" ;
             }
         }
 

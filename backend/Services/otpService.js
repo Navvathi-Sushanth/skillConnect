@@ -1,16 +1,6 @@
-const nodemailer = require("nodemailer");
+const axios = require("axios")
 const { SIGNUP_USERS, OTPS, USERS,DETAILS } = require("../Database/Models");
 
-const transporter = nodemailer.createTransport({
-    host: "smtp.gmail.com", 
-    port: 587, 
-    secure: false, 
-    requireTLS: true,
-    auth: {
-        user: "campusconnectbyte@gmail.com",
-        pass: "ywdt yavm lajj uush",
-    }
-});
 
 const generateOTP = ()=>{
     const otp = Math.floor(100000+Math.random()*900000);
@@ -18,55 +8,65 @@ const generateOTP = ()=>{
 }
 
 async function sendOTP(req,res){
-
    
-
    try{
 
-    const email = req.body.email;
+        const email = req.body.email;
 
-    const user = await SIGNUP_USERS.findOne({
-        userEmail: email,
-    });
+        const user = await SIGNUP_USERS.findOne({
+            userEmail: email,
+        });
 
-    console.log(user)
+        console.log("user : " + user)
 
-    const otp = generateOTP().toString();
+        const otp = generateOTP().toString();
 
-    const expiresAt = new Date(Date.now() + 10*60*1000);
+        const expiresAt = new Date(Date.now() + 10*60*1000);
 
-    const newOTP = await OTPS.create({
-        otp: otp,
-        userEmail: email,
-        expiresAt: expiresAt,
-    });
+        const newOTP = await OTPS.create({
+            otp: otp,
+            userEmail: email,
+            expiresAt: expiresAt,
+        });
 
-    await transporter.sendMail({
-        from: "campusconnectbyte@gmail.com",
-        to: email,
-        subject: "CampusConnect Email Verification",
-        html: `
-        
-            <h2>CampusConnect Email Verification</h2>
-            <p>Your verification OTP is : </p>
-            <h1>${otp}</h1>
-            <p>This OTP will expire in 10 minutes.</p>
-        `
-    });
+        await axios.post(
+            'https://api.brevo.com/v3/smtp/email',
+            {
+                sender: {
+                    name: "CampusConnect",
+                    email: "campusconnectbyte@gmail.com" // Must be the email address you registered your Brevo account with
+                },
+                to: [{ email: email }],
+                subject: "CampusConnect Email Verification",
+                htmlContent: `
+                    <h2>CampusConnect Email Verification</h2>
+                    <p>Your verification OTP is : </p>
+                    <h1>${otp}</h1>
+                    <p>This OTP will expire in 10 minutes.</p>
+                `
+            },
+            {
+                headers: {
+                    'api-key': process.env.BREVO_API_KEY,
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                }
+            }
+        );
 
-    console.log("sent successfully")
-    res.json({
-        message: "successfully sent the OTP",
-    })
+        console.log("sent successfully via Brevo");
+        return res.json({
+            message: "successfully sent the OTP",
+        });
 
 
-    }catch(err){
-        console.log(err)
-        return res.status(500).json({
-            message: "internal server error ",
-        })
+        }catch(err){
+            console.log(err)
+            return res.status(500).json({
+                message: "internal server error ",
+            })
+        }
     }
-}
 
 async function verifyOTP(req, res){
     try{
@@ -93,6 +93,7 @@ async function verifyOTP(req, res){
             });
         }
         else {
+
             if(otp==dataBaseOTP.otp){
                 const user = await SIGNUP_USERS.findOne({
                     userEmail: userEmail,

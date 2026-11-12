@@ -13,8 +13,7 @@ export default function SearchComponent(props){
 
     const { 
         userId,
-        userName,
-        userEmail, 
+        userName, 
         userProfileImg 
     } = props.user;
     console.log(props);
@@ -23,13 +22,12 @@ export default function SearchComponent(props){
         <div className="search-component">
             <div className="search-left">
                 <img 
-                    className="search-profile-img" 
+                    className="post-img-icon" 
                     src={userProfileImg}
                     alt="user profile" 
                 />
                 <div className="user-details">
                     <h4>{userName}</h4>
-                    <p className="search-deatils">{userEmail}</p>
                 </div>
             </div>
             <div className="search-right">

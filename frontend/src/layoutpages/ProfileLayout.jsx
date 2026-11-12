@@ -33,7 +33,9 @@ export default function ProfileLayout(){
                 setDetails(data.cleanedUser);
 
             }catch(err){
+
                 console.log("Error from the details"+err);
+                
             }
             
         }

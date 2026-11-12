@@ -1,6 +1,51 @@
 const { POSTS } = require("../Database/Models.js");
 const cloudinary = require("./cloudinaryConfig.js");
 
+async function uploadImgToCloudinary(imageBuffer) {
+    try {
+
+        console.log(imageBuffer)
+
+        const result = await new Promise((resolve, reject)=>{
+
+        const stream = cloudinary.uploader.upload_stream(
+                {
+                    folder: "campusConnect/profiles"
+                },
+                (error,result)=>{
+                    if(error){
+                        reject(error);
+                    }
+                    else{
+                        resolve(result);
+                    }
+                },
+            );
+            stream.end(imageBuffer);
+
+        });
+
+        console.log(result.publicId)
+
+        return {
+            publicId : result.public_id,
+            secureImgUrl : result.secure_url,
+        };
+
+    }catch(err){
+        console.error("Error uploading image to Cloudinary:", JSON.stringify(err, null, 2));
+        return null;
+    }
+}
+
+async function deleteImgFromCloudinary(params) {
+    try{
+
+    }catch(err){
+        
+    }
+}
+
 async function uploadImage(data) {
     
     try{
@@ -48,5 +93,6 @@ async function uploadImage(data) {
 }
 
 module.exports = {
-    uploadImage
+    uploadImage,
+    uploadImgToCloudinary,
 }

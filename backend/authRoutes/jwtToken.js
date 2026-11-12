@@ -50,7 +50,19 @@ async function verifyToken(req, res){
     })
 }
 
+function convertJWT(token) {
+    try{
+
+        const data = jwt.verify(token, process.env.JWT_SECRET);
+        return data;
+
+    }catch(err){
+        console.log("Error in the jwt converter : " + err);
+    }
+}
+
 module.exports = {
     createWebToken,
-    verifyToken
+    verifyToken,
+    convertJWT,
 }

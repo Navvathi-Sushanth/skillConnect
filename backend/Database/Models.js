@@ -16,6 +16,7 @@ const {
         comment,
         like
 } = require("./postShema");
+const { messsage } = require("./message");
 
 const USERS = mongoose.model("Users",user);
 
@@ -41,6 +42,8 @@ const CHATROOMS = mongoose.model("ChatRooms",chatRoom);
 
 const OTPS = mongoose.model("OTPS", otp);
 
+const MESSAGES = mongoose.model("Messages", messsage)
+
 module.exports = {
         OTPS,
         USERS,
@@ -54,4 +57,5 @@ module.exports = {
         LIKES,
         DETAILS,
         CHATROOMS,
+        MESSAGES,
 };

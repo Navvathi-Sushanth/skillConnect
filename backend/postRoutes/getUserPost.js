@@ -56,17 +56,17 @@ async function getUserPosts(req, res){
                     })
                     .skip(skip)
                     .limit(10)
-                    .select("userId description imgUrl")
+                    .select("userId description secureImgUrl")
                     .populate("userId", "userName userProfileImg");
                 
-                let cleanedPost = null;
+                let cleanedPosts = null;
                 if(posts!=null){
                     cleanedPosts = posts.map((post)=>({
                         postId : post._id,
                         userName : post.userId?.userName,
                         profileImg : post.userId?.userProfileImg,
                         description : post.description,
-                        imgUrl : post.imgUrl,
+                        imgUrl : post.secureImgUrl,
                         isUser: (reqUserId == "undefined" || !reqUserId),
                     }));
 

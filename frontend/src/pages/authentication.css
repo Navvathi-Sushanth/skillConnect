@@ -1,4 +1,7 @@
 .LoginPage, .sign-up-page {
+    background-image: url("../images/logicBackGroundImg.jpeg");
+    background-size: cover;
+    background-position: center;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -23,6 +26,7 @@
     margin: 20px;
     border-radius: 20px;
     box-shadow: 2px 2px 10px black;
+    background-color: #FFFFFF;
 }
 
 .login-title {

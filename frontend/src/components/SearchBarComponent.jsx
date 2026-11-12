@@ -9,7 +9,7 @@ export default function SearchBarComponent(props){
     } = props;
     return (
         <header className="search-header">
-            <Link to="../profile" >
+            <Link to="../" >
                 <img src ={arrowIcon} className="icons"/>
             </Link>
             <div className="search-box">

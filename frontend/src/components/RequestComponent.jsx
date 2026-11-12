@@ -44,7 +44,7 @@ export default function RequestComponent(props){
             <img src={userProfileImg} className="request-profile-img" />
             <div className="request-details-box">
                 <h3>{userName}</h3>
-                <h5>{userEmail}</h5>
+                <h5 className="p-text">{userEmail}</h5>
                 <p className="p-text">wants to learn : </p>
                 <p className="p-text">hii, I am sushanth. I want learn the java</p>
             </div>

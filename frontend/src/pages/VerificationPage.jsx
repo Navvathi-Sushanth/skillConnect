@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Profile.css"
 
@@ -8,11 +8,30 @@ export default function VerificationPage(){
     const [status, setStatus] = useState("sending");
     const [inputOTP, setInputOTP] = useState("");
     const [OTP_Status, setOTP_Status] = useState("");
+    const [count, setCount] = useState(90);
+    const timerRef = useRef(null);
 
     const navigate = useNavigate();
     const handleVerifyNav = ()=>{ 
         navigate(`/login`);
     }
+
+
+    const startTimer = ()=>{
+        clearInterval(timerRef.current);
+        setCount(90);
+
+        timerRef.current = setInterval(()=>{
+            setCount(prev=>{
+                if(prev<=1){
+                    clearInterval(timerRef.current);
+                    timerRef.current = null;
+                    return 0;
+                }
+                return prev-1;
+            });
+        }, 1000);
+    };
 
 
     const verificationBtnHandler = async ()=>{
@@ -49,7 +68,7 @@ export default function VerificationPage(){
 
     const sendOTP = async ()=>{
         try{
-
+            startTimer();
             const localEmail = localStorage.getItem("email");
             setEmail(localEmail);
 
@@ -69,9 +88,10 @@ export default function VerificationPage(){
             }
             if(data.message=="internal server error"){
                 setStatus("failed try again")
+                setCount(0);
             }
 
-            console.log(data)
+            console.log("data ")
 
         }catch(err){
             console.log("Error form the getOTP : "+err);
@@ -79,9 +99,10 @@ export default function VerificationPage(){
     }
 
     useEffect(()=>{
-
         sendOTP();
-
+        return ()=>{
+            clearInterval(timerRef.current);
+        }
     },[])
 
 
@@ -102,7 +123,17 @@ export default function VerificationPage(){
                     }}
                 />
                 <p className="p-text">Don't receive OTP code ?</p>
-                <button className="resend-otp">Resend Code</button>
+                {
+                    (count==0)?
+                        <button className="resend-otp"
+                            onClick={()=>{
+                                sendOTP();
+    
+                            }}
+                        >Resend Code</button>
+                    :
+                        <p className="p-text">resend code in {`${Math.floor(count/60)}:${String(count%60).padStart(2,0)}`}'s</p>
+                }
                 <p className="p-text">{OTP_Status}</p>
                 <button 
                     className="verify-btn"

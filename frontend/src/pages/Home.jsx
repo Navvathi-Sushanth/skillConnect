@@ -2,6 +2,7 @@ import Header from "../components/Header.jsx";
 import "./Profile.css";
 import Post from "../components/Post.jsx";
 import { useState, useEffect, useRef } from "react"
+import {useSocket} from "../middleWares/SocketProvider.jsx"
 
 // const Style = {
 //     height: "100vh",
@@ -12,7 +13,7 @@ import { useState, useEffect, useRef } from "react"
 
 
 export default function Home(){
-     
+    const socket = useSocket();
     const [ posts, setPosts ] = useState([]);
     const [ postsComponent, setPostsComponents ] = useState(null);
     const loadingRef = useRef(true);
@@ -26,6 +27,19 @@ export default function Home(){
             getPosts();
         }
     }
+
+
+    useEffect(()=>{
+
+        if(!socket){
+            return ;
+        }
+
+        socket.on("newMessage",(data)=>{
+            window.alert(data.message)
+        })
+
+    },[socket]);
 
     async function getPosts() { 
         try{

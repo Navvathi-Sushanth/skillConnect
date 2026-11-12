@@ -19,7 +19,6 @@ async function getPosts(req, res) {
             .populate("userId","_id userName userProfileImg");
 
         
-        
         let cleanedPosts = null;
         if(posts!=null){
             cleanedPosts = posts.map((post)=>({

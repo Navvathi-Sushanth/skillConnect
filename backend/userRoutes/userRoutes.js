@@ -1,5 +1,9 @@
 const express = require("express");
 const router = express.Router();
+const multer = require('multer');
+const storage = multer.memoryStorage();
+const upload = multer({storage:storage});
+
 const getDetails = require("./getDetails.js");
 const getUsers = require("./getUsers.js");
 const saveDetails = require("./saveDetails.js");
@@ -8,7 +12,8 @@ const { postRequest, getRequests, requestResponse } = require("./request.js");
 const {
     getConnections,
     removeConnection,
-} = require("./follow.js")
+} = require("./follow.js");
+const { changeProfile } = require("./profile.js");
 
 router.get("/get-details",getDetails);
 router.post("/connections/:page", getConnections);
@@ -21,5 +26,6 @@ router.get("/get-requests",getRequests);
 router.post("/add-skill",addSkill);
 router.delete("/delete-skill", deleteSkill);
 router.delete("/remove-connection", removeConnection);
+router.patch("/change-profile",upload.single("userProfileImg"), changeProfile)
 
 module.exports = router;

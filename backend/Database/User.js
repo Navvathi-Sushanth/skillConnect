@@ -28,6 +28,11 @@ const user = new mongoose.Schema({
         type: String,
         default: "https://static.vecteezy.com/system/resources/previews/026/619/142/original/default-avatar-profile-icon-of-social-media-user-photo-image-vector.jpg",
     },
+
+    publicId : {
+        type: String,
+        default: "null",
+    }
     
 });
 
@@ -193,26 +198,6 @@ const chatRoom = mongoose.Schema({
     timestamps: true
 });
 
-const message = mongoose.Schema({
-
-    roomId: {
-        type: String,
-        required: true,
-    },
-
-    sender: {
-        type: mongoose.Schema.Types.ObjectId,
-        required: true,
-    },
-
-    message: {
-        type: String,
-        required: true,
-    }
-
-}, {
-    timestamps: true,
-})
 
 const otp = mongoose.Schema({
 
@@ -243,6 +228,5 @@ module.exports = {
     skill,
     otherDetails,
     chatRoom,
-    message,
     otp,
 }

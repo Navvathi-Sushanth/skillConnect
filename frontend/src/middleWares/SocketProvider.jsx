@@ -10,12 +10,14 @@ export default function SocketProvider({children}){
     useEffect(()=>{
 
         const END_POINT = import.meta.env.VITE_END_POINT;
-        const newSocket = io(END_POINT, {
+        const newSocket = io("http://localhost:5000", {
             autoConnect: false,
             auth: {
-                // token: token
+                token: localStorage.getItem("token"),
             }
         });
+
+        setSocket(newSocket);
 
         newSocket.on("connect",()=>{
             console.log("socket connected successfully");
@@ -27,8 +29,6 @@ export default function SocketProvider({children}){
         });
 
         newSocket.connect();
-
-        setSocket(newSocket);
 
         newSocket.emit("message","sushant");
     

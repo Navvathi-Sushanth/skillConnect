@@ -31,6 +31,8 @@ export const sendRequest = async (receiver)=>{
 export default function Post(props){
 
     const [clickBtn, setClickBtn] = useState(false);
+    const [isExpand, setIsExpand] = useState(false);
+
     const navigate = useNavigate();
     const {
         userId,
@@ -48,7 +50,7 @@ export default function Post(props){
                 <img 
                     src={profileImg} 
                     alt="post pic" 
-                    className="icons" 
+                    className="post-img-icon" 
                     onClick={()=>{
                         navigate(`/users/${userId}`);
                     }}
@@ -69,8 +71,33 @@ export default function Post(props){
                         ><img src={xImg} className="icons"/></button>
                 }
             </header>
-            <div className="post-container">
-                <pre className="descriotion">{description}</pre>
+            <div 
+                className="post-container"
+                onClick = {
+                            ()=>{
+                                setIsExpand(prev=>!prev);
+                            }
+                        }
+                >
+                <pre className="descriotion">
+                    {
+                        (isExpand)?
+                            description   
+                        :
+                            description.slice(0,80) 
+                    }
+                    {
+                        description.length>80 
+                        &&
+                            !isExpand
+                        &&
+                        <span
+                            className="post-description-status"
+                            >
+                                ...more
+                        </span>
+                    }
+                </pre>
                 {
                     imgUrl
                     &&

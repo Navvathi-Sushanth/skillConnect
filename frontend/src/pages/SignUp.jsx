@@ -86,7 +86,6 @@ export default function SignUp(){
     return (
 
         <div className="sign-up-page page">
-            <h1 className="login-header">SignUp</h1>
             <div className="login-box">
                 <p className="login-title">SignUp into Skill Mate </p>
                 <input 

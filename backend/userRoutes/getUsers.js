@@ -48,7 +48,6 @@ async function getUsers(req, res) {
             cleanedUsers = users.map((user)=>({
                 userId : user?._id,
                 userName: user?.userName,
-                userEmail: user?.userEmail,
                 userProfileImg: user?.userProfileImg || `https://static.vecteezy.com/
                     system/resources/previews/026/619/142/original/default-
                     avatar-profile-icon-of-social-media-user-photo-image-vector.jpg`,

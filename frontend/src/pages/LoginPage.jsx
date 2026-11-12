@@ -55,7 +55,7 @@ export default function LoginPage(){
 
             if(data.message == "authorized"){
                 localStorage.setItem("token",data.token);
-                localStorage.setItem("userEmail",credentials.userEmail);
+                localStorage.setItem("userId",data.userId);
                 navigate("/");
             }
             else {
@@ -75,7 +75,7 @@ export default function LoginPage(){
 
     return (
         <div className="LoginPage page">
-            <h1 className="login-header">Login</h1>
+        
             <div className="login-box">
                 <p className="login-title">login into Skill Mate </p>
                 <input 

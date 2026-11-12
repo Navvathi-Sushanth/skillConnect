@@ -1,4 +1,4 @@
-import {BrowserRouter,Routes,Route} from "react-router-dom";
+import {BrowserRouter,Routes,Route, Outlet} from "react-router-dom";
 import { lazy, Suspense } from 'react'
 const Home = lazy(()=> import("./pages/Home.jsx"));
 const Layout = lazy(()=>import("./layoutpages/Layout.jsx"));
@@ -17,12 +17,14 @@ import VerificationPage from "./pages/VerificationPage.jsx";
 import FollowersPage from "./pages/FollowersPage.jsx";
 import SocketProvider from "./middleWares/SocketProvider.jsx";
 import ConversationsPage from "./pages/ConversationsPage.jsx";
+import DirectMessagePage from "./pages/DirectMessagePage.jsx";
+import LoaderComponent from "./components/LoaderComponent.jsx";
 
 
 export default function App(){
     return (
         <BrowserRouter>
-          <Suspense fallback={<div>Loading....</div>}>
+          <Suspense fallback={<LoaderComponent />}>
             <Routes>
               <Route path="/login" element={<LoginPage />} />
               <Route path="/signup" element={<SignUp />} />
@@ -30,24 +32,27 @@ export default function App(){
               <Route element={<ProtectedRoute />}>
                 <Route element={
                   <SocketProvider>
-                    <Layout />
+                    <Outlet />
                   </SocketProvider>
                 }>
-                  <Route path="/" element={<Home/>}/>
+                  <Route element = {<Layout />}>
+                    <Route path="/" element={<Home/>}/>
+                    <Route path="/search" element={<SearchPage />} />
+                    <Route path="/profile" element={<ProfileLayout />} >
+                      <Route index element={<ProfileSkill />}/>
+                      <Route path="posts" element={<PostPage />} />
+                    </Route>
+                    <Route path="/profile/followers" element={<FollowersPage />} />
+                    <Route path="/profile/following" element={<FollowersPage />} />
+                    <Route path="/addPost" element={<AddPost />} />
+                    <Route path="/requests" element={<Requests />} />
+                    <Route path="/users/:id" element={<ProfileLayout />} >
+                      <Route index element={<ProfileSkill />}/>
+                      <Route path="posts" element={<PostPage />} />
+                    </Route>
+                  </Route>
                   <Route path="conversations" element={<ConversationsPage />} />
-                  <Route path="/search" element={<SearchPage />} />
-                  <Route path="/profile" element={<ProfileLayout />} >
-                    <Route index element={<ProfileSkill />}/>
-                    <Route path="posts" element={<PostPage />} />
-                  </Route>
-                  <Route path="/profile/followers" element={<FollowersPage />} />
-                  <Route path="/profile/following" element={<FollowersPage />} />
-                  <Route path="/addPost" element={<AddPost />} />
-                  <Route path="/requests" element={<Requests />} />
-                  <Route path="/users/:id" element={<ProfileLayout />} >
-                    <Route index element={<ProfileSkill />}/>
-                    <Route path="posts" element={<PostPage />} />
-                  </Route>
+                    <Route path="/conversations/:conversationKey" element={<DirectMessagePage />} />
                 </Route>
               </Route>
               <Route path="*" element={<Page404 />} />
