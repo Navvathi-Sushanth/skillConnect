@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import ConversationHeader from "../components/ConversationHeader";
-import ConversationBox from "../components/conversationBox";
+import ConversationBox from "../components/ConversationBox";
 import LoaderComponent from "../components/LoaderComponent";
 
 export default function ConversationsPage(){
