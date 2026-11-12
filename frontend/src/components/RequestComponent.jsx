@@ -41,7 +41,7 @@ export default function RequestComponent(props){
     return (
         <div className="request-component">
           <div className="request-details">
-            <img src={userProfileImg} className="request-profile-img" />
+            <img src={userProfileImg} className="post-img-icon" />
             <div className="request-details-box">
                 <h3>{userName}</h3>
                 <h5 className="p-text">{userEmail}</h5>

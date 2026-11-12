@@ -76,7 +76,7 @@ export default function ProfileHeader(props){
 
       const token = localStorage.getItem('token');
 
-      const response = await fetch(`${ import.meta.env.VITE_SOCKET_END_POINT }/api/get-conversation-key`,{
+      const response = await fetch(`${ import.meta.env.VITE_SOCKET_END_POINT }api/get-conversation-key`,{
         method: "POST",
         headers : {
           "Content-Type": "application/json"
