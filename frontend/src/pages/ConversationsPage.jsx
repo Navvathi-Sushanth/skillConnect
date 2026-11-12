@@ -15,7 +15,7 @@ export default function ConversationsPage(){
 
             console.log(token)
 
-            const response = await fetch(`http://localhost:5000/api/get-conversations`,{
+            const response = await fetch(`import.meta.env.VITE_SOCKET_END_POINT/api/get-conversations`,{
                 method : 'GET',
                 headers : {
                     token: token,

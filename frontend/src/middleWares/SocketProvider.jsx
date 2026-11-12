@@ -9,8 +9,7 @@ export default function SocketProvider({children}){
 
     useEffect(()=>{
 
-        const END_POINT = import.meta.env.VITE_END_POINT;
-        const newSocket = io("http://localhost:5000", {
+        const newSocket = io(import.meta.env.VITE_SOCKET_END_POINT, {
             autoConnect: false,
             auth: {
                 token: localStorage.getItem("token"),
