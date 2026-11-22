@@ -15,7 +15,7 @@ app.use(express.json());
 
 const io = new Server(http, {
     cors: {
-        origin: "https://connectyourskill.vercel.app",
+        origin: "*",
     }
 });
 

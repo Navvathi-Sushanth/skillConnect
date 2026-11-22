@@ -1,3 +1,5 @@
+@import url("https://fonts.cdnfonts.com/css/billabong");
+
 *{
     margin: 0px;
     padding: 0px;
@@ -5,7 +7,7 @@
 }
 
 .icons {
-   width: 35px;
+   width: 27px;
    border-radius: 45%;
    margin: 10px;
 }
@@ -25,6 +27,13 @@
     z-index: 1000;
 }
 
+.main-header {
+    font-family: 'billabong', cursive;
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: normal;
+}
+
 .footer-box, .message-composer-div{
     background-color: white;
     position: fixed;
@@ -35,6 +44,20 @@
     transform: translateX(-50%);
     height: 50px;
 }
+
+.footer-icons {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+    cursor: pointer;
+
+    transition: transfrom 0.2s ease;
+}
+
+.footer-box a:hover .footer-icons {
+    transform: scale(1.1);
+}
+
 
 .Profile-header {
     display: flex;

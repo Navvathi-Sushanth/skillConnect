@@ -7,6 +7,10 @@ export function validator(credentials){
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const pinRegex = /^\d{5}-[a-zA-Z]{2,}-\d{3}$/
 
+    function isPositiveIntegerRegex(str) {
+        return /^\d+$/.test(str.trim());
+    }
+
     if(email==""||password==""||PIN==""){
         return "Enter all the details";
         
@@ -21,6 +25,9 @@ export function validator(credentials){
     }
     else if(!pinRegex.test(PIN)){
         return "Enter the valid PIN";
+    }
+    else if(!isPositiveIntegerRegex(password)){
+        return "Password must be 6 digits";
     }
     else {
         return "";

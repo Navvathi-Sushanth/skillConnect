@@ -37,6 +37,7 @@ export default function App(){
                 }>
                   <Route element = {<Layout />}>
                     <Route path="/" element={<Home/>}/>
+                    <Route path="conversations" element={<ConversationsPage />} />
                     <Route path="/search" element={<SearchPage />} />
                     <Route path="/profile" element={<ProfileLayout />} >
                       <Route index element={<ProfileSkill />}/>
@@ -51,8 +52,7 @@ export default function App(){
                       <Route path="posts" element={<PostPage />} />
                     </Route>
                   </Route>
-                  <Route path="conversations" element={<ConversationsPage />} />
-                    <Route path="/conversations/:conversationKey" element={<DirectMessagePage />} />
+                  <Route path="/conversations/:conversationKey" element={<DirectMessagePage />} />
                 </Route>
               </Route>
               <Route path="*" element={<Page404 />} />

@@ -111,10 +111,14 @@ export default function ProfileHeader(props){
       :
         <div className="Profile-header">
           <div className="profile-box">
-            <button 
-              className="logout-btn"
-              onClick={logoutHandler}
-              >logout</button>
+            {
+              isUser
+              &&
+              <button 
+                className="logout-btn"
+                onClick={logoutHandler}
+                >logout</button>
+            }
             <div className="profile-header-details">
               <div className="img-div">
                 <img 

@@ -28,6 +28,10 @@ export default function SignUp(){
             return;
         }
 
+        if(validation!=""){
+            return;
+        }
+
         try {
 
             setCredentials((prev)=>({
@@ -110,7 +114,7 @@ export default function SignUp(){
                     type="text" 
                     onChange={textInputHandler} 
                     className="login-input" 
-                    placeholder="User PIN" 
+                    placeholder="24001-cs-000" 
                     value={credentials.userPIN}
                 />
                 <input 
@@ -118,7 +122,7 @@ export default function SignUp(){
                     type="password" 
                     onChange={textInputHandler} 
                     className="login-input" 
-                    placeholder="6 digits only"
+                    placeholder="Password 6 digits only"
                     value={credentials.userPassword}
                 />
                 {outputText && <p className="output-text">{outputText}</p>}

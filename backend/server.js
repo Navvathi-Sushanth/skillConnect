@@ -6,7 +6,7 @@ require("dotenv").config();
 
 app.use(express.json());
 app.use(cors({
-    origin: "https://connectyourskill.vercel.app",
+    origin: "*",
 }));
 
 connectDB();

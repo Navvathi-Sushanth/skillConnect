@@ -15,7 +15,7 @@ export default function Header(){
                     className="post-icon icons"
                 />
             </Link>
-            <h2>CampusConnect</h2>
+            <h2 className='main-header'>CampusConnect</h2>
             <Link to="requests"><img className = "icons" src={requestIcon} alt="request icon" /></Link>
         </div>
     )
