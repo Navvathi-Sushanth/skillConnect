@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom"
+import { Link, useLocation } from "react-router-dom"
 import arrowIcon from "../icons/left-arrow-icon.svg";
 import searchIcon from "../icons/search-icon-black.svg";
 
@@ -7,9 +7,12 @@ export default function SearchBarComponent(props){
         search,
         setSearch,
     } = props;
+
+    const location = useLocation();
+
     return (
         <header className="search-header">
-            <Link to="../" >
+            <Link to={`${location.pathname}/..`} >
                 <img src ={arrowIcon} className="icons"/>
             </Link>
             <div className="search-box">

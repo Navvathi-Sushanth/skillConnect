@@ -76,6 +76,7 @@ export default function FollowersPage(){
                 search={search}
                 setSearch={setSearch}
             />
+            <h1 className="follow-header">{fetchType} : </h1>
            {
             connections.map((connection)=><FollowComponent 
                 key={connection._id}

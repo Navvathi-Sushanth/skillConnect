@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useSocket } from "../middleWares/SocketProvider";
 import { useRevalidator } from "react-router-dom";
+import sendMessageIcon from "../icons/newSendIcon.png";
 
 export default function MessageComposer(props){
 
@@ -15,6 +16,10 @@ export default function MessageComposer(props){
 
     const sendMessage = async ()=>{
         try{
+
+            if(message.trim()==""){
+                return;
+            }
 
             socket.emit("message",{
                 conversationKey: conversationKey,
@@ -53,7 +58,7 @@ export default function MessageComposer(props){
                     className="send-message-btn"
                     onClick={sendMessage}
                     >
-                    ↗️
+                    <img src={sendMessageIcon} alt="sendbtn" className="send-message-icon" />
                 </button>
             </div>
         </div>

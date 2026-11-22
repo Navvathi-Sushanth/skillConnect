@@ -50,7 +50,7 @@ export default function SignUp(){
 
             const data = await response.json();
             if(data.message == "signUp successfully"){
-                localStorage.setItem("email",credentials.userEmail);
+                localStorage.setItem("userEmail",credentials.userEmail);
                 handleSignUpNav();
             }
             if(data.message == "User is already exists"){

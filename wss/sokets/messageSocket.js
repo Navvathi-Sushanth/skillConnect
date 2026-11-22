@@ -1,4 +1,28 @@
-const { MESSAGES, CHATROOMS } = require("../Database/Models");
+const { MESSAGES, CHATROOMS, USERS } = require("../Database/Models");
+
+async function getDetails() {
+    try{
+
+        const user = await USERS
+            .findOne({
+                _id: sender,
+            })
+            .select("_id userName userProfileImg");
+
+        const {
+            userName,
+            userProfileImg
+        } = user;
+
+        return ({
+            userName,
+            userProfileImg
+        });
+
+    }catch(err){
+        console.log("Error from the getDetail in the messageSocket : " + err);
+    }
+}
 
 function messageSocket(io, socket, sharedState){
 
@@ -13,10 +37,20 @@ function messageSocket(io, socket, sharedState){
 
             if(sharedState.chatRooms.has(conversationKey)){
                 console.log( sharedState.chatRooms.get(conversationKey))
+                const {
+                    userName,
+                    userProfileImg
+                } = getDetails(sender);
+                const newData = {
+                    ...data,
+                    userName,
+                    userProfileImg
+                }
                 sharedState.chatRooms.get(conversationKey).participants.forEach(user => {
                     const userId = user.toString();
+                    
                     if(sharedState.onlineUsers.has(userId)){
-                        io.to(sharedState.onlineUsers.get(userId)).emit("new-message", data);
+                        io.to(sharedState.onlineUsers.get(userId)).emit("new-message", newData);
                     }
                 });
             }
@@ -32,10 +66,21 @@ function messageSocket(io, socket, sharedState){
                     })
                     .lean();
                 console.log("chatRoom : " + conversationKey);
+                const {
+                    userName,
+                    userProfileImg
+                } = getDetails(sender);
+                const newData = {
+                    ...data,
+                    userName,
+                    userProfileImg
+
+                }
                 chatRoom.participants.forEach(participant=>{
+
                     const userId = participant.toString();
                     if(sharedState.onlineUsers.has(userId)){
-                        io.to(sharedState.onlineUsers.get(userId)).emit("new-message", data);
+                        io.to(sharedState.onlineUsers.get(userId)).emit("new-message", newData);
                     }
                 });
                 

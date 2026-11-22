@@ -3,6 +3,7 @@ import "./Profile.css";
 import Post from "../components/Post.jsx";
 import { useState, useEffect, useRef } from "react"
 import {useSocket} from "../middleWares/SocketProvider.jsx"
+import newMessageToast from "../utils/toast.jsx";
 
 // const Style = {
 //     height: "100vh",
@@ -35,8 +36,9 @@ export default function Home(){
             return ;
         }
 
-        socket.on("newMessage",(data)=>{
-            window.alert(data.message)
+        socket.on("new-message",(data)=>{
+            console.log(data);
+            newMessageToast(data);
         })
 
     },[socket]);
@@ -72,9 +74,8 @@ export default function Home(){
     useEffect(()=>{
 
         window.addEventListener("scroll",handleScroll);
-
         getPosts();
-        
+
         return ()=>{
             window.removeEventListener("scroll", handleScroll);
         }

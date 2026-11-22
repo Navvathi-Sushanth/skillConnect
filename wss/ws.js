@@ -7,6 +7,7 @@ const { Server } = require('socket.io');
 const { messageSocket } = require("./sokets/messageSocket.js");
 const joinConversationSocket = require("./sokets/joinConversationSocket.js");
 const verifySocketAuth = require("./middleWares/verifySocketAuth.js");
+const disconnectedSocket = require("./sokets/disconnetedSocket.js");
 
 require("dotenv").config();
 
@@ -44,6 +45,11 @@ io.on("connection",async (socket)=>{
 
     joinConversationSocket(socket, sharedState);
     messageSocket(io, socket, sharedState);
+    disconnectedSocket(io, socket, sharedState.onlineUsers);
+
+    socket.on("disconnect", ()=>{
+
+    })
 
 });
 

@@ -44,7 +44,7 @@ async function getConnections(req,res){
             cleanedConnections = connections.map(({_id,followersId})=>({
                 _id: _id,
                 userName: followersId.userName,
-                userEmail: followersId.userEmail,
+                userEmail: followersId.userEmail.slice(0,3) + "...@gmail.com",
                 userProfileImg: followersId.userProfileImg,
             }));
         }
@@ -63,7 +63,7 @@ async function getConnections(req,res){
                 cleanedConnections = connections.map(({_id,followingId})=>({
                     _id: _id,
                     userName: followingId.userName,
-                    userEmail: followingId.userEmail,
+                    userEmail: followingId.userEmail.slice(0,4) + "...@gamil.com",
                     userProfileImg: followingId.userProfileImg,
                 }));
 

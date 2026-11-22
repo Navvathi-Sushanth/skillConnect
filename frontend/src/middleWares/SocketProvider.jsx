@@ -29,10 +29,27 @@ export default function SocketProvider({children}){
 
         newSocket.connect();
 
-        newSocket.emit("message","sushant");
+        newSocket.emit("message","SUSHANTH_____18");
+
+        const handleColse = ()=>{
+            if(newSocket.connected){
+                newSocket.emit("socketDisconnected", {
+                    token: localStorage.getItem("token")
+                })
+            }
+
+            newSocket.disconnect();
+        }
+
+
+        window.addEventListener("beforeunload", handleColse);
+        window.addEventListener("pagehide", handleColse);
+
     
         return () => {
-            newSocket.disconnect();
+            window.removeEventListener("beforeunload", handleColse);
+            window.removeEventListener("pagehide", handleColse);
+            handleColse(newSocket);
         }
 
     },[]);

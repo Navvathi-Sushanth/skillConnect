@@ -19,11 +19,18 @@ import SocketProvider from "./middleWares/SocketProvider.jsx";
 import ConversationsPage from "./pages/ConversationsPage.jsx";
 import DirectMessagePage from "./pages/DirectMessagePage.jsx";
 import LoaderComponent from "./components/LoaderComponent.jsx";
+import { Toaster } from "react-hot-toast";
 
 
 export default function App(){
     return (
         <BrowserRouter>
+          <Toaster
+            position="top-right"
+            toastOptions={{
+              duration: 3000
+            }}
+          />
           <Suspense fallback={<LoaderComponent />}>
             <Routes>
               <Route path="/login" element={<LoginPage />} />

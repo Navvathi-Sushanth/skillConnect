@@ -40,7 +40,7 @@ export default function FollowComponent(props){
     return(
         <div className="follow-component">
             <div className="follow-component-left">
-                <img src={userProfileImg} alt="user profile" className="icons"/>
+                <img src={userProfileImg} alt="user profile" className="post-img-icon"/>
                 <div className="follow-component-details">
                     <h3>{userName}</h3>
                     <p>{userEmail}</p>
