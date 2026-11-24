@@ -1,10 +1,10 @@
 import {Outlet, Navigate} from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 
 export default function ProtectedRoute(){
 
-    const [ flag, setFlag ] = useState(false);
+    const flagRef = useRef(false);
     const [ loadding, setLoading ] = useState(false);
 
     useEffect(()=>{
@@ -25,7 +25,7 @@ export default function ProtectedRoute(){
 
                     const data = await response.json();
                     if(data.message == "authorized"){
-                        setFlag(true);
+                        flagRef.current=true;
                     }
                 }
             }catch(err){
@@ -48,7 +48,7 @@ export default function ProtectedRoute(){
         )
     }
     else {
-        if(flag){
+        if(flagRef.current){
             return <Outlet />;
         }
         else {

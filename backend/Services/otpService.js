@@ -42,7 +42,7 @@ async function sendOTP(req,res){
                     <h2>CampusConnect Email Verification</h2>
                     <p>Your verification OTP is : </p>
                     <h1>${otp}</h1>
-                    <p>This OTP will expire in 10 minutes.</p>
+                    <p>This OTP will expire in 1:30 minutes.</p>
                 `
             },
             {
@@ -63,10 +63,10 @@ async function sendOTP(req,res){
         }catch(err){
             console.log(err)
             return res.status(500).json({
-                message: "internal server error ",
+                message: "internal server error " + err,
             })
         }
-    }
+}
 
 async function verifyOTP(req, res){
     try{
