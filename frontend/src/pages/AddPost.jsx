@@ -1,13 +1,16 @@
 import "./Profile.css";
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import xImg from "../images/x-img1.png";
 import { useState, useEffect } from "react";
 import starsIcon from "../images/stars-icon.svg";
 import mirrorStars from "../images/stars-mirror-icon.png";
 import { useSocket } from "../middleWares/SocketProvider";
 import newMessageToast from "../utils/toast";
+import LoaderComponent from "../components/LoaderComponent";
 
 export default function AddPost(){
+
+    const navigate = useNavigate();
     
     const [description, setDescription] = useState("");
     const [previewImg , setPreviewImg] = useState(null);
@@ -16,6 +19,7 @@ export default function AddPost(){
     }
     
     const [ selectedImg, setSelectedImg ] = useState(null);
+    const [ loading, setLoading ] = useState(false);
 
     const socket = useSocket();
 
@@ -32,6 +36,7 @@ export default function AddPost(){
         formData.append("description",description);
         formData.append("imageUrl",selectedImg);
         try{
+            setLoading(true);
             const token = localStorage.getItem("token");
             const response = await fetch(`${import.meta.env.VITE_END_POINT}/api/post/add-post`,{
                 method: "POST",
@@ -47,6 +52,8 @@ export default function AddPost(){
             setDescription("");
             setSelectedImg(null);
             setPreviewImg(null);
+            setLoading(false);
+            navigate("/");
         }
     }
 
@@ -68,45 +75,52 @@ export default function AddPost(){
 
     return (
         <div className="page add-post">
-            <header className="addPost-header">
-                <Link to="../" ><img src ={xImg} className="icons"/></Link>
-                <h2 className="header-text">
-                    <img className="icons" src={starsIcon} />
-                    Create Post
-                    <img className="icons" src={mirrorStars} />
-                </h2>
-                <button className="post-btn"
-                        onClick={postHandler}
-                >
-                    post
-                </button>
-            </header>
-            <div className="description-box">
-                <textarea 
-                    rows="4"
-                    placeholder="share your thoughts...."
-                    className="post-description"
-                    onChange={textInputHandler}
-                    value={description}
-                    autoFocus
-                    >
-                
-                </textarea>
-            </div>
-            <h3 style={{padding : "10px"}}>Add to your post </h3>
-            <input type="file"
-                className="image-upload"
-                accept="image/*"
-                onChange={handleImageChange}
-            />
-            <div className="img-container">
-                {
-                    previewImg 
-                    &&
-                    <img src={previewImg} className="selected-img"/>
-                }
-            </div>
+           {
+                (loading)?
+                    <LoaderComponent />
+                :
+                    <>
+                        <header className="addPost-header">
+                            <Link to="../" ><img src ={xImg} className="icons"/></Link>
+                            <h2 className="header-text">
+                                <img className="icons" src={starsIcon} />
+                                Create Post
+                                <img className="icons" src={mirrorStars} />
+                            </h2>
+                            <button className="post-btn"
+                                    onClick={postHandler}
+                            >
+                                post
+                            </button>
+                        </header>
+                        <div className="description-box">
+                            <textarea 
+                                rows="4"
+                                placeholder="share your thoughts...."
+                                className="post-description"
+                                onChange={textInputHandler}
+                                value={description}
+                                autoFocus
+                                >
+                            
+                            </textarea>
+                        </div>
+                        <h3 style={{padding : "10px"}}>Add to your post </h3>
+                        <input type="file"
+                            className="image-upload"
+                            accept="image/*"
+                            onChange={handleImageChange}
+                        />
+                        <div className="img-container">
+                            {
+                                previewImg 
+                                &&
+                                <img src={previewImg} className="selected-img"/>
+                            }
+                        </div>
 
+                    </>
+           }
         </div>
     )
 }
