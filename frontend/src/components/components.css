@@ -34,6 +34,32 @@
     letter-spacing: normal;
 }
 
+.request-link {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+}
+
+.request-link .icons {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+}
+
+.new-request-number-div {
+   position: absolute;
+   transform: translate(10px,12px);
+   border: 1px solid green;
+   font-size: small;
+   padding: 1px 5px;
+   border-radius: 50%;
+   text-align: center;
+   background-color:  #ff3040;
+   color: #ffffff;
+   border: none;
+}
+
 .footer-box, .message-composer-div{
     background-color: white;
     position: fixed;

@@ -8,7 +8,7 @@ const getDetails = require("./getDetails.js");
 const getUsers = require("./getUsers.js");
 const saveDetails = require("./saveDetails.js");
 const { getSkills, addSkill, deleteSkill } = require("./getSkills.js");
-const { postRequest, getRequests, requestResponse } = require("./request.js");
+const { postRequest, getRequests, requestResponse, getRequestCount } = require("./request.js");
 const {
     getConnections,
     removeConnection,
@@ -26,6 +26,7 @@ router.get("/get-requests",getRequests);
 router.post("/add-skill",addSkill);
 router.delete("/delete-skill", deleteSkill);
 router.delete("/remove-connection", removeConnection);
-router.patch("/change-profile",upload.single("userProfileImg"), changeProfile)
+router.patch("/change-profile",upload.single("userProfileImg"), changeProfile);
+router.get("/get-request-count", getRequestCount);
 
 module.exports = router;

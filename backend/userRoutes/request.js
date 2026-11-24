@@ -1,5 +1,7 @@
+const { convertJWT } = require("../authRoutes/jwtToken.js");
 const {REQUESTS, USERS, CONNECTIONS} = require("../Database/Models.js");
-const jwt = require("jsonwebtoken")
+const jwt = require("jsonwebtoken");
+const { getUserId } = require("./getUserId.js");
 
 async function postRequest(req, res) {
 
@@ -160,8 +162,50 @@ async function requestResponse(req, res) {
     
 }
 
+async function getRequestCount(req, res) {
+
+    try{
+
+        const {
+            token
+        } = req.headers;
+        if(token==null){
+            return 
+        }
+        const userEmail = convertJWT(token).userEmail ?? "undefined";
+
+        if(userEmail=="undefined"){
+            return res.status(401).json({
+                message: "token is not valid",
+                count : 0
+            })
+        }
+
+        const userId = await getUserId(userEmail);
+        if(userId!=null){
+            const count = await REQUESTS.countDocuments({
+                receiver: userId,
+            });
+
+            return res.status(200).json({
+                message:  "success",
+                count : count,
+            })
+        }
+
+
+    }catch(err){
+        console.log("Error from the Get request count : " + err);
+        return res.status(500).json({
+            message: "internal server error"
+        })
+    }
+    
+}
+
 module.exports = {
     postRequest,
     getRequests,
     requestResponse,
+    getRequestCount,
 }
