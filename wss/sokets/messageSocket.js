@@ -1,6 +1,6 @@
 const { MESSAGES, CHATROOMS, USERS } = require("../Database/Models");
 
-async function getDetails() {
+async function getDetails(sender) {
     try{
 
         const user = await USERS
@@ -40,7 +40,7 @@ function messageSocket(io, socket, sharedState){
                 const {
                     userName,
                     userProfileImg
-                } = getDetails(sender);
+                } = await getDetails(sender);
 
                 console.log(userName, userProfileImg);
                 const newData = {
@@ -71,7 +71,7 @@ function messageSocket(io, socket, sharedState){
                 const {
                     userName,
                     userProfileImg
-                } = getDetails(sender);
+                } = await getDetails(sender);
                 const newData = {
                     ...data,
                     userName,

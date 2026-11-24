@@ -4,9 +4,12 @@ import FollowComponent from "../components/FollowComponent";
 import { useEffect, useState, useRef } from "react";
 import { useLocation } from "react-router-dom";
 
+import { useSocket } from "../middleWares/SocketProvider";
+import newMessageToast from "../utils/toast";
+
 export default function FollowersPage(){
 
-
+    const socket = useSocket();
 
     const [search, setSearch] = useState("");
     const [connections, setconnections] = useState([]);
@@ -66,7 +69,23 @@ export default function FollowersPage(){
             loadProfiles();
         }
         
-    },[search])
+    },[search]);
+
+    useEffect(()=>{
+
+        if(!socket){
+            return ;
+        }
+
+        socket.on("new-message",(data)=>{
+            newMessageToast(data);
+        })
+
+        return ()=>{
+            socket.off("new-message");
+        }
+
+    },[socket]);
 
 
     return (

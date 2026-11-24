@@ -6,13 +6,20 @@ const SocketContext = createContext(null);
 export default function SocketProvider({children}){
     
     const [socket, setSocket] = useState(null);
+    const [token, setToken] = useState(null);
 
     useEffect(()=>{
+
+        setToken(localStorage.getItem("token"));
+
+        if(token==null){
+            return;
+        }
 
         const newSocket = io(import.meta.env.VITE_SOCKET_END_POINT, {
             autoConnect: false,
             auth: {
-                token: localStorage.getItem("token"),
+                token: token,
             }
         });
 
@@ -52,7 +59,7 @@ export default function SocketProvider({children}){
             handleColse(newSocket);
         }
 
-    },[]);
+    },[token]);
 
     return (
         <SocketContext.Provider value={socket}>

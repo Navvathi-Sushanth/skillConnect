@@ -1,9 +1,11 @@
 import "./Profile.css";
 import {Link} from 'react-router-dom';
 import xImg from "../images/x-img1.png";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import starsIcon from "../images/stars-icon.svg";
 import mirrorStars from "../images/stars-mirror-icon.png";
+import { useSocket } from "../middleWares/SocketProvider";
+import newMessageToast from "../utils/toast";
 
 export default function AddPost(){
     
@@ -14,6 +16,9 @@ export default function AddPost(){
     }
     
     const [ selectedImg, setSelectedImg ] = useState(null);
+
+    const socket = useSocket();
+
     function handleImageChange(e){
        const file = e.target.files[0];
         if(file){
@@ -44,6 +49,22 @@ export default function AddPost(){
             setPreviewImg(null);
         }
     }
+
+    useEffect(()=>{
+
+        if(!socket){
+            return ;
+        }
+
+        socket.on("new-message",(data)=>{
+            newMessageToast(data);
+        })
+
+        return ()=>{
+            socket.off("new-message");
+        }
+
+    },[socket]);
 
     return (
         <div className="page add-post">

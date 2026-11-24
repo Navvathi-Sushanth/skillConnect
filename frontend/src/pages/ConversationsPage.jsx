@@ -2,11 +2,15 @@ import { useEffect, useRef, useState } from "react";
 import ConversationHeader from "../components/ConversationHeader";
 import ConversationBox from "../components/ConversationBox";
 import LoaderComponent from "../components/LoaderComponent";
+import { useSocket } from "../middleWares/SocketProvider";
+import newMessageToast from "../utils/toast"
 
 export default function ConversationsPage(){
 
     const [ conversations, setConversations ] = useState([]);
     const loading = useRef(true);
+
+    const socket = useSocket();
 
     const getConversations = async ()=>{
         try{
@@ -33,6 +37,24 @@ export default function ConversationsPage(){
             loading.current = false;
         }
     }
+
+    useEffect(()=>{
+
+        if(!socket){
+            return ;
+        }
+
+        socket.on("new-message",(data)=>{
+            newMessageToast(data);
+        })
+
+        return ()=>{
+            socket.off("new-message");
+        }
+
+    },[socket]);
+
+
     useEffect(()=>{
 
         getConversations()

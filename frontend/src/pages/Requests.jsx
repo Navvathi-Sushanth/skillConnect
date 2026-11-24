@@ -2,9 +2,14 @@ import { useState, useEffect } from "react";
 import "./Profile.css";
 import RequestComponent from "../components/RequestComponent";
 
+import { useSocket } from "../middleWares/SocketProvider";
+import newMessageToast from "../utils/toast"
+
 export default function Requests(){
 
     const [requests, setRequests] = useState([]);
+
+    const socket = useSocket();
 
     const getRequests = async ()=>{
         try{
@@ -34,7 +39,23 @@ export default function Requests(){
 
         getRequests();
 
-    },[])
+    },[]);
+
+    useEffect(()=>{
+
+        if(!socket){
+            return ;
+        }
+
+        socket.on("new-message",(data)=>{
+            newMessageToast(data);
+        })
+
+        return ()=>{
+            socket.off("new-message");
+        }
+
+    },[socket]);
 
     return(
         <div className="page requests-page">

@@ -2,8 +2,12 @@ import { Outlet, useParams } from "react-router-dom";
 import "../pages/Profile.css";
 import ProfileHeader from "../components/ProfileHeader";
 import { useEffect, useState } from "react";
+import { useSocket } from "../middleWares/SocketProvider";
+import newMessageToast from "../utils/toast";
 
 export default function ProfileLayout(){
+
+    const socket = useSocket();
 
     const userId = useParams()?.id;
     console.log("useParams",useParams()?.id)
@@ -46,6 +50,22 @@ export default function ProfileLayout(){
     useEffect(()=>{
         console.log(details);
     },[details]);
+
+    useEffect(()=>{
+
+        if(!socket){
+            return ;
+        }
+
+        socket.on("new-message",(data)=>{
+            newMessageToast(data);
+        })
+
+        return ()=>{
+            socket.off("new-message");
+        }
+
+    },[socket]);
 
     return (
         <div className="profile-page page">

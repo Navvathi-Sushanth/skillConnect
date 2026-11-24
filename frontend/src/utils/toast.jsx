@@ -8,13 +8,15 @@ export default function newMessageToast(props){
     console.log(props);
 
     const {
-        message
+        message,
+        userName,
+        userProfileImg
     } = props
     toast.custom(
         <div className="toast-div">
-            <img src = {dp} className="toast-icon"/>
+            <img src = {userProfileImg} className="toast-icon"/>
             <div className="toast-content">
-                <h3 className="h1-toast">Sushanth</h3>
+                <h3 className="h1-toast">{userName}</h3>
                 <p className="p-text">{message}</p>
             </div>
         </div>,
