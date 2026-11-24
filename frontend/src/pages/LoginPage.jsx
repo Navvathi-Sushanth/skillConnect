@@ -92,7 +92,7 @@ export default function LoginPage(){
                     type="text" 
                     onChange={textInputHandler} 
                     className="login-input" 
-                    placeholder="User PIN" 
+                    placeholder="24001-cs-000" 
                     value={credentials.userPIN}
                 />
                 <input 

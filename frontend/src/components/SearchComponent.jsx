@@ -40,6 +40,7 @@ export default function SearchComponent(props){
                 <button 
                     className={(!reqBtnClick)?"request-btn":"connection-click-btn"}
                     onClick = {()=>{
+                        if(reqBtnClick) return;
                         sendRequest(userId);
                         setReqBtnClick(true);
                     }}

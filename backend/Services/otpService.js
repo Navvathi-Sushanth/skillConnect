@@ -21,7 +21,7 @@ async function sendOTP(req,res){
 
         const otp = generateOTP().toString();
 
-        const expiresAt = new Date(Date.now() + 10*60*1000);
+        const expiresAt = new Date(Date.now() + (1.5)*60*1000);
 
         const newOTP = await OTPS.create({
             otp: otp,

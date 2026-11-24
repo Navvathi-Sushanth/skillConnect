@@ -253,10 +253,8 @@
 .connection-click-btn {
     border: none;
     background-color: white;
-    font-size: large;
-    margin-left: auto;
-    padding: 10px;
-    color: lightblue;
+    padding: 5px 8px;
+    border-radius: 10px;
 }
 
 .connection-btn:hover{
@@ -344,8 +342,8 @@
 }
 
 .request-btn {
-    border: 1px solid gray;
-    background-color: #FFFFFF;
+    border: none;
+    background-color: #0D6EFD;
     padding: 5px 8px;
     border-radius: 10px;
 }

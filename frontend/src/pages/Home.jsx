@@ -37,9 +37,12 @@ export default function Home(){
         }
 
         socket.on("new-message",(data)=>{
-            console.log(data);
             newMessageToast(data);
         })
+
+        return ()=>{
+            socket.off("new-message");
+        }
 
     },[socket]);
 

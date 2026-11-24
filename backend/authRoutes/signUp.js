@@ -2,6 +2,7 @@ const {
     USERS,
     SIGNUP_USERS, 
 } = require("../Database/Models.js");
+const { hashPassword } = require("./password.js");
 
 async function signUp(req, res){
 
@@ -32,12 +33,14 @@ async function signUp(req, res){
 
     if(user){
         return res.status(409).json({
-                message: "UserName already exists",
-                token: user._id,
-            })
+            message: "UserName already exists",
+            token: user._id,
+        })
     }
 
     try {
+
+        const hashedPassword = await hashPassword(userPassword); 
 
         user = await SIGNUP_USERS.findOne({
             userEmail,
@@ -51,7 +54,7 @@ async function signUp(req, res){
                     $set: {
                         userName,
                         userPIN,
-                        userPassword
+                        userPassword : hashedPassword,
                     }
                 },
 
@@ -66,13 +69,13 @@ async function signUp(req, res){
                 token: user._id,
             })
 
-        }
+        }   
 
         user = await SIGNUP_USERS.create({
             userName,
             userEmail, 
             userPIN, 
-            userPassword
+            userPassword : hashedPassword
         });
 
         return res.status(201).json({

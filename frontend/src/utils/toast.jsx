@@ -4,6 +4,9 @@ import "./toast.css"
 
 export default function newMessageToast(props){
 
+
+    console.log(props);
+
     const {
         message
     } = props

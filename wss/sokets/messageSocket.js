@@ -41,6 +41,8 @@ function messageSocket(io, socket, sharedState){
                     userName,
                     userProfileImg
                 } = getDetails(sender);
+
+                console.log(userName, userProfileImg);
                 const newData = {
                     ...data,
                     userName,

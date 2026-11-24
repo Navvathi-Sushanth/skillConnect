@@ -69,7 +69,7 @@ export default function VerificationPage(){
     const sendOTP = async ()=>{
         try{
             startTimer();
-            const localEmail = localStorage.getItem("email");
+            const localEmail = localStorage.getItem("userEmail");
             setEmail(localEmail);
 
             const response = await fetch(`${import.meta.env.VITE_END_POINT}/api/email-verification`,{
