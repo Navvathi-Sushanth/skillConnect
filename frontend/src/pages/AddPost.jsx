@@ -1,7 +1,7 @@
 import "./Profile.css";
 import {Link, useNavigate} from 'react-router-dom';
 import xImg from "../images/x-img1.png";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import starsIcon from "../images/stars-icon.svg";
 import mirrorStars from "../images/stars-mirror-icon.png";
 import { useSocket } from "../middleWares/SocketProvider";
@@ -12,6 +12,8 @@ export default function AddPost(){
 
     const navigate = useNavigate();
     
+
+    const clicked = useRef(false);
     const [description, setDescription] = useState("");
     const [previewImg , setPreviewImg] = useState(null);
     const textInputHandler = (e)=>{
@@ -36,7 +38,14 @@ export default function AddPost(){
         formData.append("description",description);
         formData.append("imageUrl",selectedImg);
         try{
+
+            if(clicked==true){
+               return
+            }
+
+            clicked.current = true;
             setLoading(true);
+            
             const token = localStorage.getItem("token");
             const response = await fetch(`${import.meta.env.VITE_END_POINT}/api/post/add-post`,{
                 method: "POST",
@@ -53,6 +62,7 @@ export default function AddPost(){
             setSelectedImg(null);
             setPreviewImg(null);
             setLoading(false);
+            clicked.current = false;
             navigate("/");
         }
     }
