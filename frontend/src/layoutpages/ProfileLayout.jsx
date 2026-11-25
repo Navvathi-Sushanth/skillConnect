@@ -16,7 +16,19 @@ export default function ProfileLayout(){
         userName: "",
         userPIN: "",
         useProfileImg: "",
-    })
+    });
+
+    useEffect(()=>{
+        try{
+
+            if(userId==null){
+                return;
+            }
+
+        }catch(err){
+            console.log("Error from the isConnection");
+        }
+    }, [userId]);
 
     useEffect(()=>{
         async function getDeatails() {

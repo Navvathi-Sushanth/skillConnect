@@ -63,7 +63,7 @@ async function getConnections(req,res){
                 cleanedConnections = connections.map(({_id,followingId})=>({
                     _id: _id,
                     userName: followingId.userName,
-                    userEmail: followingId.userEmail.slice(0,4) + "...@gamil.com",
+                    userEmail: followingId.userEmail.slice(0,4) + "...@gmail.com",
                     userProfileImg: followingId.userProfileImg,
                 }));
 

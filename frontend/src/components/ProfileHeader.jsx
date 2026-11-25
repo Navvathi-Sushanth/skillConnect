@@ -5,6 +5,7 @@ import { sendRequest } from "./Post";
 import editIcon from "../icons/edit-icon.svg";
 import LoadingComponent from "./LoaderComponent";
 import LoaderComponent from "./LoaderComponent";
+import { useEffect } from "react";
 
 export default function ProfileHeader(props){
 
@@ -12,6 +13,7 @@ export default function ProfileHeader(props){
   const navigate = useNavigate();
   const fileInputRef = useRef(null);
   const [loading, setLoading ] = useState(false);
+  const [followState, setFollowState] = useState("Follow");
 
   const { 
     userId,
@@ -170,9 +172,10 @@ export default function ProfileHeader(props){
                   onClick={
                     ()=>{
                       followBtnHandler(userId);
+                      setFollowState("Requested");
                     }
                   }
-                  >Follow</button>
+                  >{followState}</button>
                 <button 
                   className="message-btn"
                   onClick={ messageBtnHandler }
@@ -189,13 +192,13 @@ export default function ProfileHeader(props){
               end
               className={({isActive})=>(isActive)?"Active-link":"link"}
               >
-                profile skill
+                Profile Skill
             </NavLink>
             <NavLink 
               to="posts" 
               className={({isActive})=>(isActive)?"Active-link":"link"}
               >
-                posts
+                Posts
             </NavLink>
           </div>
         </div>

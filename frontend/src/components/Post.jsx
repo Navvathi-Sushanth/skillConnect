@@ -28,6 +28,14 @@ export const sendRequest = async (receiver)=>{
     }
 }
 
+export const deletePost = async (postId)=>{
+    try{
+                
+    }catch(err){
+        console.log("Error in the delete post : ", + err);
+    }
+}
+
 export default function Post(props){
 
     const [clickBtn, setClickBtn] = useState(false);
@@ -68,6 +76,7 @@ export default function Post(props){
                     :
                         <button 
                             className={(!clickBtn)?"connection-btn":"connection-click-btn"}
+                            onClick={deletePost}
                         ><img src={xImg} className="icons"/></button>
                 }
             </header>
