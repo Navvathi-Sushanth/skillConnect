@@ -91,7 +91,7 @@ export default function SignUp(){
 
         <div className="sign-up-page page">
             <div className="login-box">
-                <p className="login-title">SignUp into Skill Mate </p>
+                <p className="login-title">SignUp into CampusConnects</p>
                 <input 
                     id="userName" 
                     type="text" 

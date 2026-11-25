@@ -1,6 +1,7 @@
 import { EditBtn, SubHeader, DetailComponent, Footer, SkillFooter, Skill, SubHeader2 } from "../components/ProfileComponents"
 import { useState,useRef, useEffect } from "react";
 import { useOutletContext, useParams } from "react-router-dom";
+import LoaderComponent from "../components/LoaderComponent";
 
 
 export default function ProfileSkill(props){
@@ -22,6 +23,7 @@ export default function ProfileSkill(props){
     const [newExpertSkill,setNewExpertSkill] = useState("");
     const [newLearnSkill,setNewLearnSkill] = useState("");
   
+    const [ loading, setLoading ] = useState(false);
     const onChangeHandler = (e)=>{
         const key = e.target.id;
         const value = e.target.value;
@@ -101,6 +103,8 @@ export default function ProfileSkill(props){
     const saveDetails = async (componenet)=>{
         try {
 
+            setLoading(true);
+
             let data = null;
             console.log(componenet)
             if(componenet==="About"){
@@ -132,6 +136,11 @@ export default function ProfileSkill(props){
 
         }catch(err){
             console.log("Error from the Profileskill of saveDetails");
+        }
+        finally{
+            setLoading(false);
+            setAboutEdit(false);
+            setDetailsEdit(false);
         }
     }
 
@@ -169,177 +178,184 @@ export default function ProfileSkill(props){
 
     return (
         <div className="sub-profile-page page">
-            <div className="about-box">
-                {
-                    (details.isUser)?
-                        <SubHeader header={"About Me"} handler={setAboutEdit}/>
-                    :
-                        <SubHeader2 header={"About Me"} />
-                }
-                {
-                    (aboutEdit)?
-                        <div className="about-edit-boc">
-                            <textarea 
-                                id="userAbout"
-                                name="about-input"
-                                className="about-input"
-                                value={details.userAbout}
-                                onChange={onChangeHandler}
-                            ></textarea>
-                            <Footer 
-                                    onClick = {{
-                                        saveDetails: saveDetails,
-                                        component: "About",
-                                    }}
-                            />
+            {
+                (loading)?
+                    <LoaderComponent />
+                :
+                    <>
+                        <div className="about-box">
+                            {
+                                (details.isUser)?
+                                    <SubHeader header={"About Me"} handler={setAboutEdit}/>
+                                :
+                                    <SubHeader2 header={"About Me"} />
+                            }
+                            {
+                                (aboutEdit)?
+                                    <div className="about-edit-boc">
+                                        <textarea 
+                                            id="userAbout"
+                                            name="about-input"
+                                            className="about-input"
+                                            value={details.userAbout}
+                                            onChange={onChangeHandler}
+                                        ></textarea>
+                                        <Footer 
+                                                onClick = {{
+                                                    saveDetails: saveDetails,
+                                                    component: "About",
+                                                }}
+                                        />
+                                    </div>
+                                :
+                                    <p className="about-text">
+                                        {details.userAbout}
+                                    </p>
+
+                            }
                         </div>
-                    :
-                        <p className="about-text">
-                            {details.userAbout}
-                        </p>
+                        <div className="detail-box">
 
-                }
-            </div>
-            <div className="detail-box">
+                            {
+                                (details.isUser)?
+                                    <SubHeader header={"Details"} handler={setDetailsEdit} />
+                                :
+                                    <SubHeader2 header={"Details"} />
+                            }
 
-                {
-                    (details.isUser)?
-                        <SubHeader header={"Details"} handler={setDetailsEdit} />
-                    :
-                        <SubHeader2 header={"Details"} />
-                }
-
-                <DetailComponent values = {{
-                    id: "userPIN",
-                    title: "Roll Number",
-                    value: details.userPIN,
-                    imgUrl: "",
-                    status: {detailsEdit},
-                    onChange: onChangeHandler,
-                }}/>
-                <DetailComponent values = {{
-                    id: "userDepartment",
-                    title: "Department",
-                    value: details.userDepartment,
-                    imgUrl: "",
-                    status: {detailsEdit},
-                    onChange: onChangeHandler,
-                }}/>
-                <DetailComponent values = {{
-                    id: "userCollege",
-                    title: "College",
-                    value: details.userCollege,
-                    imgUrl: "",
-                    status: {detailsEdit},
-                    onChange: onChangeHandler,
-                }}/>
-                <DetailComponent values = {{
-                    id: "userYear",
-                    title: "Year",
-                    value: details.userYear,
-                    imgUrl: "",
-                    status: {detailsEdit},
-                    onChange: onChangeHandler,
-                }}/>
-                <DetailComponent values = {{
-                    id: "userEmail",
-                    title: "Email",
-                    value: details.userEmail,
-                    imgUrl: "",
-                    status: {detailsEdit},
-                    onChange: onChangeHandler,
-                }}/>
-                <DetailComponent values = {{
-                    id: "userPhone",
-                    title: "Phone",
-                    value: details.userPhone,
-                    imgUrl: "",
-                    status: {detailsEdit},
-                    onChange: onChangeHandler,
-                }}/>
-                {
-                    detailsEdit
-                    &&
-                    <Footer 
-                        onClick={{
-                            saveDetails: saveDetails,
-                            component: "Details",
-                        }}
-                    />
-                }
-                
-            </div>
-            <div className="skills-export">
-                {
-                    (details.isUser)?
-                        <SubHeader header={"Expert in skills"} handler={setSkillsExpertEdit}/>
-                    :
-                        <SubHeader2 header={"Expert in skills"} />
-                }
-                
-                {
-                    (expertSkills.length == 0) ?
-                        <h3> Not Yet added</h3>
-                    :
-                        expertSkills.map(
-                            (skill)=><Skill 
-                                text={skill.skill} 
-                                key={skill._id} 
-                                type={"expert"}
-                                editStatus={skillsExpertEdit}
-                                childId={skill._id}
-                                deleteSkill={deleteSkill}
-                            />)
-                }
-                {
-                    skillsExpertEdit
-                    &&
-                    <>
-                        <SkillFooter 
-                            type={"expert"}
-                            addSkillHandler = {addSkill}
-                            newSkill = {newExpertSkill}
-                            newSkillHandler={setNewExpertSkill}
-                        />
-                    </>
-
-                }
-            </div>
-            <div className="skills-learn">
-                {
-                    (details.isUser)?
-                        <SubHeader header={"Skill want to learn"} handler={setSkillsLearnEdit}/>
-                    :
-                        <SubHeader2 header={"Skill want to learn"} />
-                }
-                {
-                    (learnSkills.length == 0)?
-                        <h3>Not added Yet</h3>
-                    :
-                        learnSkills.map(
-                            (skill)=><Skill 
-                                text={skill.skill} 
-                                key={skill._id} 
-                                type={"learn"}
-                                editStatus={skillsLearnEdit}
-                                childId={skill._id}
-                                deleteSkill={deleteSkill}
-                            />)
-                }
-               
-                {
-                    skillsLearnEdit
-                    &&
-                    <>
-                        <SkillFooter 
-                            addSkillHandler = {addSkill}
-                            newSkill = {newLearnSkill}
-                            newSkillHandler= {setNewLearnSkill}
+                            <DetailComponent values = {{
+                                id: "userPIN",
+                                title: "Roll Number",
+                                value: details.userPIN,
+                                imgUrl: "",
+                                status: {detailsEdit},
+                                onChange: onChangeHandler,
+                            }}/>
+                            <DetailComponent values = {{
+                                id: "userDepartment",
+                                title: "Department",
+                                value: details.userDepartment,
+                                imgUrl: "",
+                                status: {detailsEdit},
+                                onChange: onChangeHandler,
+                            }}/>
+                            <DetailComponent values = {{
+                                id: "userCollege",
+                                title: "College",
+                                value: details.userCollege,
+                                imgUrl: "",
+                                status: {detailsEdit},
+                                onChange: onChangeHandler,
+                            }}/>
+                            <DetailComponent values = {{
+                                id: "userYear",
+                                title: "Year",
+                                value: details.userYear,
+                                imgUrl: "",
+                                status: {detailsEdit},
+                                onChange: onChangeHandler,
+                            }}/>
+                            <DetailComponent values = {{
+                                id: "userEmail",
+                                title: "Email",
+                                value: details.userEmail,
+                                imgUrl: "",
+                                status: {detailsEdit},
+                                onChange: onChangeHandler,
+                            }}/>
+                            <DetailComponent values = {{
+                                id: "userPhone",
+                                title: "Phone",
+                                value: details.userPhone,
+                                imgUrl: "",
+                                status: {detailsEdit},
+                                onChange: onChangeHandler,
+                            }}/>
+                            {
+                                detailsEdit
+                                &&
+                                <Footer 
+                                    onClick={{
+                                        saveDetails: saveDetails,
+                                        component: "Details",
+                                    }}
+                                />
+                            }
                             
-                        />
+                        </div>
+                        <div className="skills-export">
+                            {
+                                (details.isUser)?
+                                    <SubHeader header={"Expert in skills"} handler={setSkillsExpertEdit}/>
+                                :
+                                    <SubHeader2 header={"Expert in skills"} />
+                            }
+                            
+                            {
+                                (expertSkills.length == 0) ?
+                                    <h3> Not Yet added</h3>
+                                :
+                                    expertSkills.map(
+                                        (skill)=><Skill 
+                                            text={skill.skill} 
+                                            key={skill._id} 
+                                            type={"expert"}
+                                            editStatus={skillsExpertEdit}
+                                            childId={skill._id}
+                                            deleteSkill={deleteSkill}
+                                        />)
+                            }
+                            {
+                                skillsExpertEdit
+                                &&
+                                <>
+                                    <SkillFooter 
+                                        type={"expert"}
+                                        addSkillHandler = {addSkill}
+                                        newSkill = {newExpertSkill}
+                                        newSkillHandler={setNewExpertSkill}
+                                    />
+                                </>
+
+                            }
+                        </div>
+                        <div className="skills-learn">
+                            {
+                                (details.isUser)?
+                                    <SubHeader header={"Skill want to learn"} handler={setSkillsLearnEdit}/>
+                                :
+                                    <SubHeader2 header={"Skill want to learn"} />
+                            }
+                            {
+                                (learnSkills.length == 0)?
+                                    <h3>Not added Yet</h3>
+                                :
+                                    learnSkills.map(
+                                        (skill)=><Skill 
+                                            text={skill.skill} 
+                                            key={skill._id} 
+                                            type={"learn"}
+                                            editStatus={skillsLearnEdit}
+                                            childId={skill._id}
+                                            deleteSkill={deleteSkill}
+                                        />)
+                            }
+                        
+                            {
+                                skillsLearnEdit
+                                &&
+                                <>
+                                    <SkillFooter 
+                                        addSkillHandler = {addSkill}
+                                        newSkill = {newLearnSkill}
+                                        newSkillHandler= {setNewLearnSkill}
+                                        
+                                    />
+                                </>
+                            }
+                        </div>
                     </>
-                }
-            </div>
+            }
         </div>
     )
 }

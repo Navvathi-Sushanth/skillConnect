@@ -78,7 +78,7 @@ export default function LoginPage(){
         <div className="LoginPage page">
         
             <div className="login-box">
-                <p className="login-title">login into Skill Mate </p>
+                <p className="login-title">login into CampusConnects</p>
                 <input 
                     id="userEmail" 
                     type="text" 
